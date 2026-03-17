@@ -94,16 +94,16 @@
         }]
     }
     </script>
-    <!-- SEO OPTIMIZATIONS END -->
+ 
 
     <!-- EXISTING STYLES -->
    
     <link rel="stylesheet" href="/assets/css/wa.css">
 <link rel="stylesheet" href="/assets/css/carousel.css">
     <link rel="stylesheet" href="/assets/css/style.css">
-     <link rel="stylesheet" href="./frontend/public/assets/css/style.css">
-<link rel="stylesheet" href="./frontend/public/assets/css/wa.css">
-<link rel="stylesheet" href="./frontend/public/assets/css/carousel.css">
+     <!-- <link rel="stylesheet" href="./frontend/public/assets/css/style.css"> -->
+<!-- <link rel="stylesheet" href="./frontend/public/assets/css/wa.css"> -->
+<!-- <link rel="stylesheet" href="./frontend/public/assets/css/carousel.css"> -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -112,23 +112,311 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
+
+<!-- Vitronics Marketing Header Strip -->
+<div class="vtl-strip">
+  <style>
+    .vtl-strip {
+      background: linear-gradient(135deg, #0a0f1e 0%, #0d1a3a 50%, #0a1628 100%);
+      position: relative;
+      overflow: hidden;
+      font-family: 'DM Sans', system-ui, sans-serif;
+    }
+    .vtl-strip-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,196,232,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,196,232,0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      animation: vtlGridMove 18s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes vtlGridMove { 0%{transform:translateY(0)} 100%{transform:translateY(32px)} }
+
+    .vtl-strip-orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(50px); pointer-events: none;
+      animation: vtlOrbPulse 5s ease-in-out infinite;
+    }
+    .vtl-strip-orb-1 { width:260px;height:260px;background:rgba(0,196,232,0.1);top:-80px;right:15%;animation-delay:0s; }
+    .vtl-strip-orb-2 { width:180px;height:180px;background:rgba(26,58,122,0.4);bottom:-60px;left:8%;animation-delay:2.5s; }
+    @keyframes vtlOrbPulse { 0%,100%{opacity:0.5;transform:scale(1)} 50%{opacity:0.9;transform:scale(1.08)} }
+
+    /* Top info bar */
+    .vtl-infobar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 24px;
+      background: rgba(0,0,0,0.35);
+      border-bottom: 1px solid rgba(0,196,232,0.18);
+      position: relative; z-index: 2;
+      flex-wrap: wrap; gap: 4px;
+    }
+    .vtl-infobar-left { display:flex; align-items:center; gap:6px; }
+    .vtl-live-dot {
+      width:7px;height:7px;border-radius:50%;
+      background:#22c55e;box-shadow:0 0 8px #22c55e;
+      animation: vtlBlink 2s ease-in-out infinite;
+    }
+    @keyframes vtlBlink { 0%,100%{opacity:1} 50%{opacity:0.35} }
+    .vtl-live-text { font-size:11px;color:#22c55e;letter-spacing:.9px;font-weight:600; }
+    .vtl-infobar-right { display:flex;align-items:center;gap:18px;flex-wrap:wrap; }
+    .vtl-info-link {
+      font-size:11px;color:rgba(240,244,255,0.6);
+      letter-spacing:.4px;display:flex;align-items:center;gap:4px;
+      text-decoration:none;transition:color .2s;
+    }
+    .vtl-info-link:hover { color:#00c4e8; }
+
+    /* Brand row */
+    .vtl-brand-row {
+      display:flex;align-items:center;justify-content:space-between;
+      padding:18px 24px 14px;
+      position:relative;z-index:2;
+      flex-wrap:wrap;gap:16px;
+    }
+    .vtl-brand-left { display:flex;align-items:center;gap:14px; }
+    .vtl-bolt {
+      width:48px;height:48px;border-radius:11px;
+      background:whitesmoke;
+      display:flex;align-items:center;justify-content:center;
+      flex-shrink:0;
+      /* box-shadow:0 0 18px rgba(0,196,232,0.4); */
+    }
+    .vtl-bolt svg { width:46px;height:46px;fill:white; }
+    .vtl-brand-name {
+      font-size:21px;font-weight:800;
+      color:#f0f4ff;letter-spacing:-.4px;line-height:1.1;
+      font-family: system-ui, sans-serif;
+    }
+    .vtl-brand-name span { color:#00c4e8; }
+    .vtl-brand-tagline { font-size:10px;color:rgba(240,244,255,0.5);letter-spacing:2px;text-transform:uppercase;margin-top:2px; }
+
+    .vtl-center-msg { text-align:center;flex:1;min-width:140px; }
+    .vtl-headline { font-size:14px;font-weight:700;color:#f0f4ff;letter-spacing:.3px; }
+    .vtl-subline { font-size:10px;color:rgba(240,244,255,0.5);margin-top:2px;letter-spacing:.7px; }
+    .vtl-badge-gold {
+      display:inline-block;
+      background:linear-gradient(90deg,#f5a623,#e8921a);
+      color:#fff;font-size:9px;font-weight:700;
+      letter-spacing:1px;text-transform:uppercase;
+      padding:3px 10px;border-radius:20px;margin-top:6px;
+      box-shadow:0 2px 10px rgba(245,166,35,0.4);
+    }
+
+    .vtl-brand-right { display:flex;align-items:center;gap:10px;flex-shrink:0; }
+    .vtl-hours-pill {
+      display:flex;align-items:center;gap:6px;
+      padding:5px 14px;
+      background:rgba(34,197,94,0.1);
+      border:1px solid rgba(34,197,94,0.25);
+      border-radius:20px;
+    }
+    .vtl-hours-dot { width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e;animation:vtlBlink 2s ease-in-out infinite; }
+    .vtl-hours-label { font-size:10px;color:#86efac;font-weight:600;letter-spacing:.3px; }
+ 
+    .vtl-whatsapp-btn:hover { background:#1fbe5a;transform:translateY(-1px);box-shadow:0 5px 16px rgba(37,211,102,0.5);color:#fff; }
+    .vtl-whatsapp-btn svg { width:16px;height:16px;fill:white;flex-shrink:0; }
+
+    /* Contact cards */
+    .vtl-cards {
+      display:flex;gap:8px;padding:0 24px 14px;
+      position:relative;z-index:2;flex-wrap:wrap;
+    }
+    .vtl-card {
+      display:flex;align-items:center;gap:10px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(0,196,232,0.18);
+      border-radius:10px;padding:9px 14px;
+      flex:1;min-width:150px;
+      transition:all .2s;cursor:pointer;
+      text-decoration:none;
+    }
+    .vtl-card:hover {
+      background:rgba(0,196,232,0.07);
+      border-color:#00c4e8;
+      transform:translateY(-2px);
+      box-shadow:0 4px 14px rgba(0,196,232,0.1);
+    }
+    .vtl-card-icon {
+      width:32px;height:32px;border-radius:8px;
+      background:rgba(0,196,232,0.12);
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    }
+    .vtl-card-icon svg { width:15px;height:15px;fill:#00c4e8; }
+    .vtl-card-lbl { font-size:9px;color:rgba(240,244,255,0.45);text-transform:uppercase;letter-spacing:.9px; }
+    .vtl-card-val { font-size:12px;color:#f0f4ff;font-weight:500;margin-top:1px; }
+
+    /* Stats strip */
+    .vtl-stats {
+      display:flex;border-top:1px solid rgba(0,196,232,0.15);
+      position:relative;z-index:2;flex-wrap:wrap;
+    }
+    .vtl-stat {
+      flex:1;min-width:70px;text-align:center;
+      padding:8px 6px;position:relative;
+    }
+    .vtl-stat:not(:last-child)::after {
+      content:'';position:absolute;right:0;top:20%;
+      height:60%;width:1px;background:rgba(0,196,232,0.15);
+    }
+    .vtl-stat-n { font-size:17px;font-weight:800;color:#00c4e8; }
+    .vtl-stat-l { font-size:9px;color:rgba(240,244,255,0.4);letter-spacing:.5px;margin-top:1px; }
+
+    /* Scrolling ticker */
+    .vtl-ticker {
+      background:rgba(0,196,232,0.08);
+      border-top:1px solid rgba(0,196,232,0.12);
+      border-bottom:1px solid rgba(0,196,232,0.12);
+      overflow:hidden;padding:6px 0;
+      position:relative;z-index:2;
+    }
+    .vtl-ticker-inner {
+      display:inline-flex;gap:0;
+      animation:vtlTicker 30s linear infinite;
+      white-space:nowrap;
+    }
+    @keyframes vtlTicker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .vtl-ticker-item {
+      font-size:11px;color:rgba(240,244,255,0.65);
+      padding:0 32px;letter-spacing:.5px;
+    }
+    .vtl-ticker-item strong { color:#00c4e8;font-weight:600; }
+
+    @media(max-width:600px) {
+      .vtl-infobar-right { display:none; }
+      .vtl-center-msg { display:none; }
+      .vtl-brand-row { padding:12px 16px 10px; }
+      .vtl-cards { padding:0 16px 12px; }
+    }
+  </style>
+
+  <div class="vtl-strip-grid"></div>
+  <div class="vtl-strip-orb vtl-strip-orb-1"></div>
+  <div class="vtl-strip-orb vtl-strip-orb-2"></div>
+
+  <!-- Top info bar -->
+  <div class="vtl-infobar">
+    <div class="vtl-infobar-left">
+      <div class="vtl-live-dot"></div>
+      <span class="vtl-live-text">OPEN NOW</span>
+    </div>
+    <div class="vtl-infobar-right">
+      <a href="https://maps.google.com/?q=Nairobi+CBD+Kenya" target="_blank" class="vtl-info-link">
+        <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Nairobi CBD, Kenya
+      </a>
+      <a href="mailto:info@vitronicstechnologies.co.ke" class="vtl-info-link">
+        <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        info@vitronicstechnologies.co.ke
+      </a>
+      <a href="tel:+254703182530" class="vtl-info-link">
+        <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        +254 703 182 530
+      </a>
+    </div>
+  </div>
+
+  <!-- Brand row -->
+  <div class="vtl-brand-row">
+    <div class="vtl-brand-left">
+      <div class="vtl-bolt">
+        <!-- <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> -->
+          <img src="./assets/logo/logo.webp" style="width: 40px; height: 40px;" class="logo" alt="Vitronics Technologies Logo - Electronics Store Kenya">
+      </div>
+
+      <div>
+        <div class="vtl-brand-name">Vitronics<span></span></div>
+        <div class="vtl-brand-tagline">Technologies Limited </div>
+      </div>
+    </div>
+
+    <div class="vtl-center-msg">
+      <div class="vtl-headline">Nairobi's #1 Phones,Electronics &amp; Repair Services</div>
+      <div class="vtl-subline">Phones · Screens · Batteries · Accessories · Repairs</div>
+      <div class="vtl-badge-gold">★ 500+ Happy Customers</div>
+    </div>
+
+    <div class="vtl-brand-right">
+      <div class="vtl-hours-pill">
+        <div class="vtl-hours-dot"></div>
+        <span class="vtl-hours-label">Mon–Sat · 8am–8pm</span>
+      </div>
+     
+    </div>
+  </div>
+
+  <!-- Contact cards -->
+  <div class="vtl-cards">
+    <a href="tel:+254703182530" class="vtl-card">
+      <div class="vtl-card-icon">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+      </div>
+      <div>
+        <div class="vtl-card-lbl">Call Us</div>
+        <div class="vtl-card-val">0703 182 530</div>
+      </div>
+    </a>
+
+    <a href="https://wa.me/254703182530" target="_blank" class="vtl-card">
+      <div class="vtl-card-icon">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.125 1.533 5.86L.044 23.5l5.78-1.516A11.966 11.966 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.959 0-3.782-.545-5.33-1.49l-.38-.227-3.434.9.917-3.348-.248-.386A9.96 9.96 0 0 1 2 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+      </div>
+      <div>
+        <div class="vtl-card-lbl">WhatsApp</div>
+        <div class="vtl-card-val">0703 182 530</div>
+      </div>
+    </a>
+
+    <a href="https://maps.google.com/?q=Nairobi+CBD+Kenya" target="_blank" class="vtl-card">
+      <div class="vtl-card-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      </div>
+      <div>
+        <div class="vtl-card-lbl">Location</div>
+        <div class="vtl-card-val">Nairobi CBD, Kenya</div>
+      </div>
+    </a>
+
+    <a href="mailto:info@vitronicstechnologies.co.ke" class="vtl-card">
+      <div class="vtl-card-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </div>
+      <div>
+        <div class="vtl-card-lbl">Email Us</div>
+        <div class="vtl-card-val">info@vitronicstechnologies</div>
+      </div>
+    </a>
+  </div>
+
+
+
+  <!-- Scrolling ticker -->
+  <div class="vtl-ticker">
+    <div class="vtl-ticker-inner">
+      <span class="vtl-ticker-item">📱 <strong>Phones</strong> — All brands in stock</span>
+      <span class="vtl-ticker-item">🖥️ <strong>LCD Screens</strong> — Same day replacement</span>
+      <span class="vtl-ticker-item">🔋 <strong>Batteries</strong> — Genuine &amp; compatible</span>
+      <span class="vtl-ticker-item">⚡ <strong>Fast Charging</strong> — QC 3.0 &amp; USB-C</span>
+      <span class="vtl-ticker-item">🛠️ <strong>Repairs</strong> — 12hr turnaround</span>
+      <span class="vtl-ticker-item">💻 <strong>Computers &amp; Network</strong> — Routers, cables &amp; more</span>
+      <span class="vtl-ticker-item">📦 <strong>Free delivery</strong> within Nairobi CBD</span>
+      <!-- duplicate for seamless loop -->
+      <span class="vtl-ticker-item">📱 <strong>Phones</strong> — All brands in stock</span>
+      <span class="vtl-ticker-item">🖥️ <strong>LCD Screens</strong> — Same day replacement</span>
+      <span class="vtl-ticker-item">🔋 <strong>Batteries</strong> — Genuine &amp; compatible</span>
+      <span class="vtl-ticker-item">⚡ <strong>Fast Charging</strong> — QC 3.0 &amp; USB-C</span>
+      <span class="vtl-ticker-item">🛠️ <strong>Repairs</strong> — 12hr turnaround</span>
+      <span class="vtl-ticker-item">💻 <strong>Computers &amp; Network</strong> — Routers, cables &amp; more</span>
+      <span class="vtl-ticker-item">📦 <strong>Free delivery</strong> within Nairobi CBD</span>
+    </div>
+  </div>
+</div>
+
 <body>
     <!-- HEADER SECTION -->
     <header>
         <nav class="navbar">
-            <!-- logo / brand -->
-            <a href="index.html" class="navbar-brand">
-                <img src="./frontend/public/assets/logo/vitronicstechnologiesltd.webp" class="logo" alt="Vitronics Technologies Logo - Electronics Store Kenya">
-            </a>
-
-            <!-- mobile toggle sits near the brand so it's always accessible -->
-            <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle navigation">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-
-            <!-- container for search and user/cart icons (navigation links moved below carousel) -->
+           
             <div class="nav-container">
                 <!-- search bar remains here -->
                 <input type="text" id="search-bar" placeholder="Search" onkeyup="searchProducts(this.value)" />
@@ -191,11 +479,7 @@
                                 <span class="dropdown-icon">📦</span>
                                 My Orders
                             </a>
-                            <!-- <a href="/api/Pwsd" class="dropdown-item" onclick="closeMobileMenu()">
-                                    <span class="dropdown-icon">🔒</span>
-                                    Change Password
-                                </a> -->
-                            <!-- <div class="dropdown-divider"></div> -->
+                           
                             <button class="dropdown-item logout-btn" id="logout-btn">
                             <span class="dropdown-icon">🔒</span>
                                 <span class="logout-btn">Logout</span>
@@ -213,41 +497,7 @@
 
     <main>
         <!-- HERO SECTION -->
-        <section class="hero" id="home">
-            <div class="carousel">
-                <div class="carousel-slide">
-                    <!-- <img src="./frontend/public/img/images/phones.png" alt="Mobile phones and smartphones available at Vitronics Technologies Kenya"> -->
-                     <img src="/img/images/phones.png" alt="Mobile phones and smartphones available at Vitronics Technologies Kenya">
-                    <!-- <div class="carousel-overlay"></div> -->
-                </div>
-
-                <div class="carousel-slide">
-                    <!-- <img src="./frontend/public/img/images/phone_cases_1.png" alt="Premium phone cases and protectors for all models"> -->
-                      <img src="/img/images/phone_cases_1.png" alt="Premium phone cases and protectors for all models">
-                    <!-- <div class="carousel-overlay"></div> -->
-                </div>
-
-                <div class="carousel-slide">
-                     <!-- <img src="/img/images/QC-3.0.png" alt="Fast charging adapters and power banks in Kenya"> -->
-                    <img src="./frontend/public/img/images/QC-3.0.png" alt="Fast charging adapters and power banks in Kenya">
-                    <!-- <div class="carousel-overlay"></div> -->
-                </div>
-
-                <div class="carousel-slide">
-                    <!-- <img src="./frontend/public/img/images/TWS_JBL1.png" alt="Wireless earphones and Bluetooth headphones at Vitronics"> -->
-                    <img src="/img/images/TWS_JBL1.png" alt="Wireless earphones and Bluetooth headphones at Vitronics"><div class="carousel-overlay"></div>
-                </div>
-            </div>
-
-            <button class="carousel-btn prev" id="prevBtn">&#10094;</button>
-            <button class="carousel-btn next" id="nextBtn">&#10095;</button>
-
-            <div class="carousel-indicators" id="indicators">
-                <span class="indicator active" data-slide="0"></span>
-                <span class="indicator" data-slide="1"></span>
-                <span class="indicator" data-slide="2"></span>
-            </div>
-        </section>
+        
 
         <!-- category buttons (moved from header) -->
         <section class="category-section">
@@ -267,8 +517,6 @@
             <div class="container">
                 
                  <h2 id="section-title">All Products</h2>
-                <!-- <marquee style="font-size:20px; color:red">Kenya's leading electronics store. Shop phones, LCD screens, batteries, Electricals, phone accessories, computer & network equipment at best prices in Nairobi</marquee> -->
-                <!-- <h1 id="section-title" itemprop="name">Electronics Store - Phones, Screens & Accessories in Kenya</h1> -->
                 <div class="products-grid" id="products-grid">
                     <!-- Products will be loaded here -->
                 </div>
@@ -279,14 +527,7 @@
     </main>
 
     
-    <!-- Product Modal -->
-    <!-- <div id="productModal" class="modal">
-        <div class="modal-content">
-        <div id="loading" class="loading">Loading your selection...</div>
-            <span class="close">&times;</span>
-            <div id="modal-content"></div>
-        </div>
-    </div> -->
+   
 
     <div id="productModal" class="modal" loading="lazy">
         <div class="modal-content">
@@ -348,25 +589,10 @@
         </div>
     </footer>
 
-   
-    <script src="./frontend/public/assets/js/script.js" defer></script>
+    <script src="./assets/js/script.js" defer></script>
     <!-- Performance & Loading Optimization -->
-    <!-- <script src="./frontend/public/assets/js/performance.js" defer></script> -->
-    <!-- <script src="./frontend/public/assets/js/helper.js"></script> -->
-    <script src="./frontend/public/assets/js/look.js" defer></script>
-    <script src="./frontend/public/assets/js/carousel.js" defer></script>
-    <script src="./frontend/public/assets/js/humberger.js" defer></script>
-    <script src="./frontend/public/assets/js/user-script.js" defer></script>
-    <script src="./frontend/public/assets/js/usr.js" defer></script>
-
-     
-    <script src="/assets/js/script.js" defer></script>
-    <!-- Performance & Loading Optimization -->
-    <script src="/assets/js/performance.js" defer></script>
-    <!-- <script src="./frontend/public/assets/js/helper.js"></script> -->
-    <script src="/assets/js/look.js" defer></script>
-    <script src="/assets/js/carousel.js" defer></script>
-    <script src="/assets/js/humberger.js" defer></script>
+    <script src="./assets/js/performance.js" defer></script>
+    <script src="./assets/js/look.js" defer></script>
     <script src="/assets/js/user-script.js" defer></script>
     <script src="/assets/js/usr.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -375,7 +601,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
 
-    <!-- FIXED SEO ENHANCEMENTS SCRIPT (Non-invasive) -->
+   
     <script>
         // Wait for DOM and all scripts to load
     document.addEventListener('DOMContentLoaded', function() {
@@ -475,22 +701,22 @@
             titleElement.textContent = 'All Products';
         }
     }
-    let page = 1;
+    // let page = 1;
 
-    window.addEventListener("scroll", () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-          loadMoreProducts();
-            }
-            });
+    // window.addEventListener("scroll", () => {
+    //   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+    //       loadMoreProducts();
+    //         }
+    //         });
 
-            function loadMoreProducts() {
-              fetch(`/api/products?page=${page}&limit=12`)
-                  .then(res => res.json())
-                      .then(data => {
-                            renderProducts(data);
-                                  page++;
-                                      });
-                                      }
+    //         function loadMoreProducts() {
+    //           fetch(`/api/products?page=${page}&limit=12`)
+    //               .then(res => res.json())
+    //                   .then(data => {
+    //                         renderProducts(data);
+    //                               page++;
+    //                                   });
+    //                                   }
     </script>
 </body>
 
