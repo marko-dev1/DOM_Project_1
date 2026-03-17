@@ -1,0 +1,253 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('./frontend/public/assets/logo/vitronics technologies ltd.png');
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    /* background-color: #f0f0f0; */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.form {
+    display: none;
+    padding: 2.5rem;
+}
+
+.form.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2c5530;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 500;
+    font-size: 0.95em;
+}
+
+input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2c5530;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(44, 85, 48, 0.1);
+}
+
+button {
+    /* width: 100%; */
+    padding: 12px;
+    background: linear-gradient(135deg, #2c5530 0%, #1e3a23 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+
+.back-home-button a {
+  color: white;
+}
+
+.back-home-button a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(44, 85, 48, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.form p {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #666;
+}
+
+a {
+    color: #2c5530;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #1e3a23;
+    text-decoration: underline;
+}
+
+/* Profile Section */
+#profile-section {
+    text-align: center;
+}
+
+#profile-info {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #2c5530;
+}
+
+#profile-info p {
+    margin: 0.8rem 0;
+    padding: 0.8rem;
+    background: white;
+    border-radius: 6px;
+    text-align: left;
+    border: 1px solid #e1e5e9;
+}
+
+#profile-info strong {
+    color: #2c5530;
+}
+
+/* Message Styles */
+.message {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    display: none;
+}
+
+.message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Profile Section Buttons */
+#profile-section button {
+    margin-bottom: 0.8rem;
+}
+
+#profile-section a button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+#profile-section a button:hover {
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+    
+    .container {
+        max-width: 100%;
+    }
+    
+    .form {
+        padding: 2rem 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.7em;
+        margin-bottom: 1.5rem;
+    }
+    
+    input {
+        padding: 10px 12px;
+        font-size: 0.95em;
+    }
+    
+    button {
+        padding: 11px;
+        font-size: 1em;
+    }
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Form Validation Styles */
+input:invalid {
+    border-color: #dc3545;
+}
+
+input:valid {
+    border-color: #28a745;
+}
+
+/* Enhanced Focus Styles */
+input:focus-visible {
+    outline: 2px solid #2c5530;
+    outline-offset: 2px;
+}

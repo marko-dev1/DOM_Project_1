@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- SEO OPTIMIZATIONS START -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Primary Meta Tags -->
+    <title>Shop.vitronicstechnologiesltd - Electronics Store in Kenya | Phones, LCD Screens, Accessories</title>
+      <link rel="icon" type="image/png" href="./frontend/public/assets/logo/vtl.png">
+    <meta name="description"
+        content="Vitronics Technologies Ltd - Kenya's leading electronics store. Shop phones, LCD screens, batteries, electricals, phone accessories, computer & network equipment at best prices. Free delivery in Nairobi.">
+    <meta name="keywords"
+        content="electronics Kenya, phone accessories Nairobi, LCD screens, mobile batteries,electricals, computer accessories, phone repair parts, electronics store Kenya, Vitronics Technologies">
+    <meta name="author" content="Vitronics Technologies Ltd">
+
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vitronictechnologies.co.ke/">
+    <meta property="og:title" content="Vitronics Technologies Ltd - Electronics Store">
+    <meta property="og:description"
+        content="Your trusted electronics supplier in Kenya for phones, screens, batteries & accessories">
+    <meta property="og:image" content="https://vitronictechnologies.co.ke/assets/logo/vitronics-technologies-ltd.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vitronictechnologies.co.ke/">
+    <meta property="twitter:title" content="Vitronics Technologies Ltd - Electronics Store">
+    <meta property="twitter:description"
+        content="Your trusted electronics supplier in Kenya for phones, screens, batteries & accessories">
+    <meta property="twitter:image"
+        content="https://vitronictechnologies.co.ke/assets/logo/vitronics-technologies-ltd.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://vitronictechnologies.co.ke/">
+
+    <!-- Structured Data for SEO (JSON-LD) -->
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "ElectronicsStore",
+        "name": "Vitronics Technologies Ltd",
+        "image": "https://vitronictechnologies.co.ke/assets/logo/vitronics-technologies-ltd.png",
+        "description": "Leading electronics store in Kenya specializing in phones, LCD screens, batteries, electricals, and phone accessories",
+        "url": "https://vitronictechnologies.co.ke/",
+        "telephone": "+254703182530",
+        "email": "info@vitronictechnologies.co.ke",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "",
+            "addressLocality": "Nairobi",
+            "addressRegion": "Nairobi",
+            "addressCountry": "KE"
+        },
+        "openingHours": "Mo-Fr 08:00-18:00, Sa 09:00-14:00",
+        "priceRange": "$$",
+        "sameAs": [
+            "https://www.facebook.com/vitronictechnologies",
+            "https://twitter.com/vitronictech"
+        ]
+    }
+    </script>
+
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Vitronics Technologies Ltd",
+        "description": "Electronics and mobile accessories store in Nairobi, Kenya",
+        "url": "https://vitronictechnologies.co.ke/",
+        "telephone": "+254703182530",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "Kenya",
+            "addressRegion": "Nairobi"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "-1.2921",
+            "longitude": "36.8219"
+        },
+        "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "08:00",
+            "closes": "18:00"
+        }, {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "09:00",
+            "closes": "14:00"
+        }]
+    }
+    </script>
+    <!-- SEO OPTIMIZATIONS END -->
+
+    <!-- EXISTING STYLES -->
+   
+    <link rel="stylesheet" href="/assets/css/wa.css">
+<link rel="stylesheet" href="/assets/css/carousel.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+     <link rel="stylesheet" href="./frontend/public/assets/css/style.css">
+<link rel="stylesheet" href="./frontend/public/assets/css/wa.css">
+<link rel="stylesheet" href="./frontend/public/assets/css/carousel.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- HEADER SECTION -->
+    <header>
+        <nav class="navbar">
+            <!-- logo / brand -->
+            <a href="index.html" class="navbar-brand">
+                <img src="./frontend/public/assets/logo/vitronicstechnologiesltd.webp" class="logo" alt="Vitronics Technologies Logo - Electronics Store Kenya">
+            </a>
+
+            <!-- mobile toggle sits near the brand so it's always accessible -->
+            <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <!-- container for search and user/cart icons (navigation links moved below carousel) -->
+            <div class="nav-container">
+                <!-- search bar remains here -->
+                <input type="text" id="search-bar" placeholder="Search" onkeyup="searchProducts(this.value)" />
+
+                <div class="user-section">
+                    <div class="user-menu-container" id="user-menu-container" style="display: none;">
+
+                        <span id="username-text" class="username-hover">Guest</span>
+
+                        <div class="user-dropdown" id="user-dropdown">
+                            <a href="/profile" class="dropdown-item"></a>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="openProfileModal()">
+                                <span class="dropdown-icon">👤</span> User Profile
+                            </a>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="authManager.openOrdersModal()">
+                                <span class="dropdown-icon">📦</span> My Orders
+                            </a>
+                            <button class="dropdown-item logout-btn" id="logout-btn">
+                                <span class="dropdown-icon">🔒</span>
+                                <span class="logout-btn">Logout</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="login-btn" id="login-btn" onclick="window.location.href='user-profile.html'">Login</button>
+                </div>
+            </div>
+
+            <div class="cart-icon" onclick="app.showCart()">
+                🛒
+                <span id="cart-count">0</span>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-nav" id="mobileNav">
+            <button class="mobile-close" id="mobileClose">×</button>
+            <!-- mobile search bar for quick filtering -->
+            <div class="mobile-search">
+                <input type="text" id="mobile-search-bar" placeholder="Search" onkeyup="searchProducts(this.value);" />
+            </div>
+            <div class="mobile-nav-links">
+                <a href="#" class="mobile-nav-link" onclick="showAllProducts(); closeMobileMenu()">All Products</a>
+                <a href="#" class="mobile-nav-link" onclick="filterByCategory('screens'); closeMobileMenu()">LCD Screens</a>
+                <a href="#" class="mobile-nav-link" onclick="filterByCategory('phones'); closeMobileMenu()">Phones</a>
+                <a href="#" class="mobile-nav-link" onclick="filterByCategory('phones accessories'); closeMobileMenu()">Phones Accessories</a>
+                <a href="#" class="mobile-nav-link" onclick="filterByCategory('computer'); closeMobileMenu()">Computers& Network</a>
+                <a href="#" class="mobile-nav-link" onclick="filterByCategory('batteries'); closeMobileMenu()">Batteries & Ports</a>
+                <a href="#" class="mobile-nav-link" onclick="filterByCategory('electricals'); closeMobileMenu()">Electricals</a>
+                <input type="text" id="search-bar" placeholder="Search" onkeyup="searchProducts(this.value)" />
+                <div class="user-section">
+                    <div class="mobile-user-menu" id="mobile-user-menu" style="display: none;">
+                        <span id="mobile-username-text">Guest</span>
+                        <div class="user-dropdown">
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="openProfileModal()">
+                                <span class="dropdown-icon">👤</span> User Profile
+        
+                            </a>
+                            <a href="/orders" class="dropdown-item" onclick="closeMobileMenu()">
+                                <span class="dropdown-icon">📦</span>
+                                My Orders
+                            </a>
+                            <!-- <a href="/api/Pwsd" class="dropdown-item" onclick="closeMobileMenu()">
+                                    <span class="dropdown-icon">🔒</span>
+                                    Change Password
+                                </a> -->
+                            <!-- <div class="dropdown-divider"></div> -->
+                            <button class="dropdown-item logout-btn" id="logout-btn">
+                            <span class="dropdown-icon">🔒</span>
+                                <span class="logout-btn">Logout</span>
+                                </button>
+                        </div>
+                    </div>
+        
+                    <button class="login-btn" id="mobile-login-btn" onclick="window.location.href='user-profile.html'">Login</button>
+                </div>
+        
+            </div>
+        
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero" id="home">
+            <div class="carousel">
+                <div class="carousel-slide">
+                    <!-- <img src="./frontend/public/img/images/phones.png" alt="Mobile phones and smartphones available at Vitronics Technologies Kenya"> -->
+                     <img src="/img/images/phones.png" alt="Mobile phones and smartphones available at Vitronics Technologies Kenya">
+                    <!-- <div class="carousel-overlay"></div> -->
+                </div>
+
+                <div class="carousel-slide">
+                    <!-- <img src="./frontend/public/img/images/phone_cases_1.png" alt="Premium phone cases and protectors for all models"> -->
+                      <img src="/img/images/phone_cases_1.png" alt="Premium phone cases and protectors for all models">
+                    <!-- <div class="carousel-overlay"></div> -->
+                </div>
+
+                <div class="carousel-slide">
+                     <!-- <img src="/img/images/QC-3.0.png" alt="Fast charging adapters and power banks in Kenya"> -->
+                    <img src="./frontend/public/img/images/QC-3.0.png" alt="Fast charging adapters and power banks in Kenya">
+                    <!-- <div class="carousel-overlay"></div> -->
+                </div>
+
+                <div class="carousel-slide">
+                    <!-- <img src="./frontend/public/img/images/TWS_JBL1.png" alt="Wireless earphones and Bluetooth headphones at Vitronics"> -->
+                    <img src="/img/images/TWS_JBL1.png" alt="Wireless earphones and Bluetooth headphones at Vitronics"><div class="carousel-overlay"></div>
+                </div>
+            </div>
+
+            <button class="carousel-btn prev" id="prevBtn">&#10094;</button>
+            <button class="carousel-btn next" id="nextBtn">&#10095;</button>
+
+            <div class="carousel-indicators" id="indicators">
+                <span class="indicator active" data-slide="0"></span>
+                <span class="indicator" data-slide="1"></span>
+                <span class="indicator" data-slide="2"></span>
+            </div>
+        </section>
+
+        <!-- category buttons (moved from header) -->
+        <section class="category-section">
+            <div class="container category-buttons">
+                <button class=" category-btn" onclick="showAllProducts()">All Categories</button>
+                <button class=" category-btn" onclick="filterByCategory('screens')">LCD Screens</button>
+                <button class=" category-btn" onclick="filterByCategory('phones')">Phones</button>
+                <button class=" category-btn" onclick="filterByCategory('phones accessories')">Phones Accessories</button>
+                <button class=" category-btn" onclick="filterByCategory('computer')">Computers & Network</button>
+                <button class=" category-btn" onclick="filterByCategory('batteries')">Batteries & Ports</button>
+                <button class=" category-btn" onclick="filterByCategory('electricals')">Electricals</button>
+            </div>
+        </section>
+
+        <!-- PRODUCTS SECTION -->
+        <section class="products-section">
+            <div class="container">
+                
+                 <h2 id="section-title">All Products</h2>
+                <!-- <marquee style="font-size:20px; color:red">Kenya's leading electronics store. Shop phones, LCD screens, batteries, Electricals, phone accessories, computer & network equipment at best prices in Nairobi</marquee> -->
+                <!-- <h1 id="section-title" itemprop="name">Electronics Store - Phones, Screens & Accessories in Kenya</h1> -->
+                <div class="products-grid" id="products-grid">
+                    <!-- Products will be loaded here -->
+                </div>
+                <div id="loading" class="loading">Loading products please Wait...</div>
+                <div id="error-message" class="error-message" style="display: none;"></div>
+            </div>
+        </section>
+    </main>
+
+    
+    <!-- Product Modal -->
+    <!-- <div id="productModal" class="modal">
+        <div class="modal-content">
+        <div id="loading" class="loading">Loading your selection...</div>
+            <span class="close">&times;</span>
+            <div id="modal-content"></div>
+        </div>
+    </div> -->
+
+    <div id="productModal" class="modal" loading="lazy">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+    
+            <!-- Loader -->
+            <div id="modalLoader" class="modal-loader">
+                <div class="spinner"></div>
+            </div>
+    
+            <!-- Actual content -->
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Checkout Confirmation Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirm Checkout</h2>
+            <p id="checkoutDetails"></p>
+            <div class="modal-buttons">
+                <button id="proceedCheckout">Complete</button>
+                <button id="cancelCheckout">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div id="orderDetailsModal" class="order-modal">
+        <div class="order-modal-content">
+            <span class="close-btn" onclick="closeOrderModal()">&times;</span>
+            <h2>Order Details</h2>
+            <div id="orderDetailsContent" class="order-details-content">
+                <p>Loading order details...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="profile-modal" id="profile-modal">
+        <div class="close-btn" onclick="closeProfileModal()"></div>
+        <div class="profile-modal-content">
+            <div class="modal-header">
+                <h2>User Profile</h2>
+                <button class="close-btn" onclick="closeProfileModal()">×</button>
+            </div>
+            <div class="modal-body" id="profile-modal-body">
+                <p>Loading profile...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>Phone : 0703 182 530</p>
+            <p>Email : info@vitronictechnologies.co.ke</p>
+            <p>&copy; 2026 Vitronics Technologies. All rights reserved.</p>
+        </div>
+    </footer>
+
+   
+    <script src="./frontend/public/assets/js/script.js" defer></script>
+    <!-- Performance & Loading Optimization -->
+    <!-- <script src="./frontend/public/assets/js/performance.js" defer></script> -->
+    <!-- <script src="./frontend/public/assets/js/helper.js"></script> -->
+    <script src="./frontend/public/assets/js/look.js" defer></script>
+    <script src="./frontend/public/assets/js/carousel.js" defer></script>
+    <script src="./frontend/public/assets/js/humberger.js" defer></script>
+    <script src="./frontend/public/assets/js/user-script.js" defer></script>
+    <script src="./frontend/public/assets/js/usr.js" defer></script>
+
+     
+    <script src="/assets/js/script.js" defer></script>
+    <!-- Performance & Loading Optimization -->
+    <script src="/assets/js/performance.js" defer></script>
+    <!-- <script src="./frontend/public/assets/js/helper.js"></script> -->
+    <script src="/assets/js/look.js" defer></script>
+    <script src="/assets/js/carousel.js" defer></script>
+    <script src="/assets/js/humberger.js" defer></script>
+    <script src="/assets/js/user-script.js" defer></script>
+    <script src="/assets/js/usr.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
+
+    <!-- FIXED SEO ENHANCEMENTS SCRIPT (Non-invasive) -->
+    <script>
+        // Wait for DOM and all scripts to load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Wait a bit more to ensure all your functions are loaded
+        setTimeout(function() {
+            // Save references to your original functions
+            const originalFilterByCategory = window.filterByCategory;
+            const originalShowAllProducts = window.showAllProducts;
+            
+            // Safe SEO title updater - only runs if functions exist
+            if (typeof originalFilterByCategory === 'function') {
+                // Wrap filterByCategory to add SEO title updates
+                window.filterByCategory = function(category) {
+                    // Update page title for SEO
+                    updateSEOTitleForCategory(category);
+                    
+                    // Call original function
+                    return originalFilterByCategory(category);
+                };
+            }
+            
+            if (typeof originalShowAllProducts === 'function') {
+                // Wrap showAllProducts
+                window.showAllProducts = function() {
+                    // Reset to original title
+                    document.title = "Vitronics Technologies Ltd - Electronics Store in Kenya | Phones, LCD Screens, Accessories";
+                    
+                    // Call original function
+                    return originalShowAllProducts();
+                };
+            }
+            
+            // Helper function to update SEO titles
+            function updateSEOTitleForCategory(category) {
+                const categoryTitles = {
+                    'screens': 'LCD Screens & Mobile Displays | Vitronics Technologies',
+                    'phones': 'Mobile Phones & Smartphones | Vitronics Technologies Kenya',
+                    'phones accessories': 'Phone Accessories & Cases | Vitronics Store',
+                    'computer': 'Computers & Networking Equipment | Vitronics Technologies',
+                    'batteries': 'Mobile Batteries & Power Banks | Vitronics Kenya',
+                    'electricals': 'Electricals | Vitronics Technologies'
+                };
+                
+                if (categoryTitles[category]) {
+                    document.title = categoryTitles[category];
+                }
+            }
+            
+            // Add lazy loading to images for better performance SEO
+            document.querySelectorAll('img').forEach(img => {
+                if (!img.hasAttribute('loading')) {
+                    img.setAttribute('loading', 'lazy');
+                }
+                
+                // Ensure all images have alt text
+                if (!img.alt || img.alt.trim() === '') {
+                    if (img.src.includes('logo')) {
+                        img.alt = 'Vitronics Technologies Ltd Logo';
+                    } else if (img.src.includes('phones')) {
+                        img.alt = 'Mobile phones and electronics at Vitronics';
+                    } else if (img.src.includes('cases')) {
+                        img.alt = 'Phone cases and accessories';
+                    }
+                }
+            });
+            
+            // Update section title based on category (optional visual feedback)
+            const sectionTitle = document.getElementById('section-title');
+            if (sectionTitle) {
+                // Listen for URL hash changes (if you use hash for filtering)
+                window.addEventListener('hashchange', function() {
+                    const hash = window.location.hash.substring(1);
+                    if (hash) {
+                        updateSectionTitle(hash);
+                    }
+                });
+            }
+            
+        }, 100); // Small delay to ensure your scripts are loaded
+    });
+    
+    // Function to safely update section title (separate from filter function)
+    function updateSectionTitle(category) {
+        const titleMap = {
+            'screens': 'LCD Screens',
+            'phones': 'Mobile Phones',
+            'phones accessories': 'Phone Accessories',
+            'computer': 'Computers & Network',
+            'batteries': 'Batteries',
+            'electricals': 'Electricals'
+        };
+        
+        const titleElement = document.getElementById('section-title');
+        if (titleElement && titleMap[category]) {
+            titleElement.textContent = titleMap[category];
+        } else if (titleElement && category === 'all') {
+            titleElement.textContent = 'All Products';
+        }
+    }
+    let page = 1;
+
+    window.addEventListener("scroll", () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+          loadMoreProducts();
+            }
+            });
+
+            function loadMoreProducts() {
+              fetch(`/api/products?page=${page}&limit=12`)
+                  .then(res => res.json())
+                      .then(data => {
+                            renderProducts(data);
+                                  page++;
+                                      });
+                                      }
+    </script>
+</body>
+
+</html>

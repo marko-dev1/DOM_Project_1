@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - vitronics technologies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("./assets/logo/vitronics technologies ltd.png");
+
+            background-size: contain; 
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: scroll; 
+            background-color: #f0f0f0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+        }
+
+        .alert {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-error {
+            background: #fee;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .default-credentials {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .default-credentials h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .default-credentials p {
+            margin: 5px 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Admin Control Panel</h1>
+            <p>Access the admin dashboard</p>
+        </div>
+
+        <div id="errorAlert" class="alert alert-error"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username or Email</label>
+                <input type="text" id="username" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+        
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorAlert = document.getElementById('errorAlert');
+
+            try {
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Store token and redirect to dashboard
+                    localStorage.setItem('adminToken', data.token);
+                    window.location.href = '/admin';
+                } else {
+                    // Show error message
+                    errorAlert.textContent = data.error;
+                    errorAlert.style.display = 'block';
+                }
+            } catch (error) {
+                errorAlert.textContent = 'Network error. Please try again.';
+                errorAlert.style.display = 'block';
+            }
+        });
+
+        // Check if already logged in
+        const token = localStorage.getItem('adminToken');
+        if (token) {
+            window.location.href = '/admin';
+        }
+    </script>
+</body>
+</html>
