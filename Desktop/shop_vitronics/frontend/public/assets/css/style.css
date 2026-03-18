@@ -2200,3 +2200,196 @@ img.loading {
     0%   { background-position: 200% 0; }
     100% { background-position: -200% 0; }
 }
+
+/* Trending product css*/
+/* .trending-section {
+      padding: 24px 0 8px;
+      background: linear-gradient(180deg, #f8faff 0%, #ffffff 100%);
+      border-top: 3px solid #00c4e8;
+      position: relative;
+      overflow: hidden;
+    } */
+
+    .trending-section {
+  padding: 24px 0 8px;
+  background: linear-gradient(180deg, #f8faff 0%, #ffffff 100%);
+  border-top: 3px solid #00c4e8;
+  position: relative;
+  overflow: hidden;
+  max-width: 1200px;       
+  margin: 0 auto;          
+  width: 100%;              
+  text-align: center;       
+}
+    .trending-section::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #00c4e8, #0d1a3a, #00c4e8);
+      background-size: 200% 100%;
+      animation: trendingBorder 3s linear infinite;
+    }
+    @keyframes trendingBorder {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 200% 0%; }
+    }
+
+    .trending-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px 16px;
+      flex-wrap: wrap; gap: 10px;
+    }
+    .trending-title {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .trending-fire {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: linear-gradient(135deg, #ff6b35, #f7c59f);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      box-shadow: 0 2px 8px rgba(255,107,53,0.35);
+      animation: firePulse 2s ease-in-out infinite;
+    }
+    @keyframes firePulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+    .trending-title h3 {
+      font-size: 17px; font-weight: 700;
+      color: #0d1a3a; margin: 0; letter-spacing: -0.3px;
+    }
+    .trending-title span {
+      font-size: 11px; color: #00c4e8; font-weight: 600;
+      background: rgba(0,196,232,0.1);
+      padding: 2px 8px; border-radius: 10px;
+      border: 1px solid rgba(0,196,232,0.25);
+    }
+    .trending-refresh {
+      font-size: 11px; color: #888; cursor: pointer;
+      display: flex; align-items: center; gap: 5px;
+      padding: 5px 12px; border-radius: 6px;
+      border: 1px solid #e5e7eb; background: white;
+      transition: all .2s;
+    }
+    .trending-refresh:hover { border-color: #00c4e8; color: #00c4e8; }
+    .trending-refresh svg { width: 13px; height: 13px; }
+
+    /* Horizontal scroll container */
+    .trending-scroll-wrap {
+      position: relative;
+    }
+    .trending-scroll {
+      display: flex; gap: 12px;
+      overflow-x: auto; padding: 4px 20px 16px;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .trending-scroll::-webkit-scrollbar { display: none; }
+
+    /* Scroll fade edges */
+    .trending-scroll-wrap::after {
+      content: ''; position: absolute; right: 0; top: 0; bottom: 16px;
+      width: 60px;
+      background: linear-gradient(90deg, transparent, rgba(248,250,255,0.95));
+      pointer-events: none;
+    }
+
+    /* Scroll arrows */
+    .trending-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 32px; height: 32px; border-radius: 50%;
+      background: white; border: 1px solid #e5e7eb;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 5;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all .2s; font-size: 14px; color: #444;
+    }
+    .trending-arrow:hover { border-color: #00c4e8; color: #00c4e8; }
+    .trending-arrow.left { left: 4px; }
+    .trending-arrow.right { right: 4px; }
+
+    /* Product cards */
+    .trending-card {
+      flex: 0 0 160px; min-width: 160px;
+      background: white;
+      border: 1px solid #e8ecf0;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all .22s;
+      position: relative;
+    }
+    .trending-card:hover {
+      transform: translateY(-3px);
+      border-color: #00c4e8;
+      box-shadow: 0 6px 20px rgba(0,196,232,0.15);
+    }
+    .trending-card-badge {
+      position: absolute; top: 8px; left: 8px;
+      background: linear-gradient(135deg, #ff6b35, #ff4500);
+      color: white; font-size: 9px; font-weight: 700;
+      padding: 2px 7px; border-radius: 10px;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(255,69,0,0.4);
+      z-index: 2;
+    }
+    .trending-card-img {
+      width: 100%; height: 130px;
+      object-fit: cover; display: block;
+      background: #f3f4f6;
+    }
+    .trending-card-img-placeholder {
+      width: 100%; height: 130px;
+      background: linear-gradient(135deg, #f0f4ff, #e8ecf0);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; color: #ccc;
+    }
+    .trending-card-body {
+      padding: 10px 10px 12px;
+    }
+    .trending-card-name {
+      font-size: 12px; font-weight: 600; color: #1a1a2e;
+      line-height: 1.35; margin-bottom: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .trending-card-price {
+      font-size: 14px; font-weight: 800; color: #2c5530;
+    }
+    .trending-card-stock {
+      font-size: 10px; color: #888; margin-top: 2px;
+    }
+    .trending-card-stock.low { color: #e67e22; font-weight: 600; }
+    .trending-card-stock.out { color: #e74c3c; font-weight: 600; }
+
+    /* Skeleton loader */
+    .trending-skeleton {
+      flex: 0 0 160px; min-width: 160px;
+      background: white; border: 1px solid #e8ecf0;
+      border-radius: 12px; overflow: hidden;
+    }
+    .trending-skeleton-img {
+      width: 100%; height: 130px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+    .trending-skeleton-line {
+      height: 10px; border-radius: 4px; margin: 10px 10px 6px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+    .trending-skeleton-line.short { width: 60%; height: 8px; }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    @media(max-width: 600px) {
+      .trending-card { flex: 0 0 140px; min-width: 140px; }
+      .trending-card-img { height: 110px; }
+    }

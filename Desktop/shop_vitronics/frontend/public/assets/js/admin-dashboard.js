@@ -938,12 +938,12 @@ function displayProducts(products) {
                   
 
 
-                    <td> <strong>${product.name ? product.name.substring(0, 50) + '...' : 'Unnamed Product.Update product name'} </strong></td>
+                    <td> <strong>${product.name ? product.name.substring(0, 30) + '...' : 'Unnamed Product.Update product name'} </strong></td>
                     <td>${cost.toFixed(2)}</td> 
                     <td>${price.toFixed(2)}</td> 
                     <td><strong>${product.stock || 0}</strong><small>units</small></td>
                     <td><small>${product.category || '-'}</small></td>
-                    <td>
+                     <td>
                         <button class="btn btn-warning" style="background-color:orange; color: white; padding: 6px 12px; margin-right: 5px;" onclick="editProduct(${product.id})">Edit</button>
                         <button class="btn btn-danger" style="background-color:red; color: white; padding: 6px 12px;" onclick="deleteProduct(${product.id})">Delete</button>
                     </td>
@@ -4707,30 +4707,29 @@ function startAutoRefresh() {
         const activeSection = document.querySelector('.content-section.active')?.id;
 
         try {
+            // Always refresh stat numbers silently — never re-render tables or reset pagination
+            await updateSalesStatsFromBackend();
+            await updateRevenueStatsFromBackend();
+            await calculateAndDisplayAllProfits();
             switch (activeSection) {
                 case 'dashboard':
-                    await loadDashboardStats();
-                    await loadInventoryDashboard();
+                    await updateExpenseStatsFromBackend();
+                    await updateRepairsServicesStatsFromBackend();
+                    try {
+                        const products = getCachedProducts() || await apiCall('/api/products');
+                        if (Array.isArray(products)) {
+                            setCachedProducts(products);
+                            updateDashboardInventoryStats(products);
+                            updateInventoryAlerts(products);
+                        }
+                    } catch (e) { /* silent */ }
                     break;
-                case 'sales':
-                    await loadSalesFromBackend();
-                    await updateSalesStatsFromBackend();
-                    break;
-                case 'revenue':
-                    await loadRevenue();
-                    await updateRevenueStatsFromBackend();
-                    break;
-                case 'inventory':
-                    await loadFullInventory();
-                    break;
+
                 case 'orders':
                     await loadOrders();
                     break;
-                default:
-                    await updateSalesStatsFromBackend();
-                    await calculateAndDisplayAllProfits();
-                    break;
             }
+
         } catch (error) {
             console.warn('Auto-refresh error:', error.message);
         }
@@ -4745,12 +4744,15 @@ function stopAutoRefresh() {
     }
 }
 
-// Pause when tab hidden, resume when visible
+// Pause when tab is hidden, resume instantly when visible
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
         stopAutoRefresh();
     } else {
         startAutoRefresh();
-        loadDashboardStats();
+        // Refresh stats immediately on tab focus — no table resets
+        updateSalesStatsFromBackend();
+        updateRevenueStatsFromBackend();
+        calculateAndDisplayAllProfits();
     }
 });

@@ -416,6 +416,8 @@
     <!-- HEADER SECTION -->
     <header>
         <nav class="navbar">
+           <a href="index.html" class="navbar-brand" style="background-color: #00c4e8; margin: 10px; padding: 5px; border: none;
+           box-sizing: border-box; border-radius: 6px; text-align: center; color: #fff; font-size: 1.1em;"> Home</a>
            
             <div class="nav-container">
                 <!-- search bar remains here -->
@@ -512,6 +514,39 @@
             </div>
         </section>
 
+        <section class="trending-section" id="trending-section">
+           <div class="trending-header">
+    <div class="trending-title">
+      <div class="trending-fire">🔥</div>
+      <h3>Trending Now</h3>
+      <span id="trending-count">Loading...</span>
+    </div>
+    <button class="trending-refresh" onclick="loadTrendingProducts()" title="Refresh picks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M23 4v6h-6M1 20v-6h6"/>
+        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+      </svg>
+      Refresh picks
+    </button>
+  </div>
+
+  <div class="trending-scroll-wrap">
+    <button class="trending-arrow left" onclick="scrollTrending(-1)" aria-label="Scroll left">&#8249;</button>
+    <div class="trending-scroll" id="trending-scroll">
+      <!-- Skeletons shown while loading -->
+      ${Array(6).fill(0).map(() => `
+        <div class="trending-skeleton">
+          <div class="trending-skeleton-img"></div>
+          <div class="trending-skeleton-line"></div>
+          <div class="trending-skeleton-line short"></div>
+        </div>
+      `).join('')}
+    </div>
+    <button class="trending-arrow right" onclick="scrollTrending(1)" aria-label="Scroll right">&#8250;</button>
+  </div>
+</section>
+
+
         <!-- PRODUCTS SECTION -->
         <section class="products-section">
             <div class="container">
@@ -590,7 +625,7 @@
     </footer>
 
     <script src="./assets/js/script.js" defer></script>
-    <!-- Performance & Loading Optimization -->
+   <script src="./assets/js/trending.js"  defer></script>
     <script src="./assets/js/performance.js" defer></script>
     <script src="./assets/js/look.js" defer></script>
     <script src="/assets/js/user-script.js" defer></script>

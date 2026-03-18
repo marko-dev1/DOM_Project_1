@@ -1369,25 +1369,52 @@ displayProducts(products) {
     }
 
 
+ 
     displayProductModal(product) {
-        const modal = document.getElementById('productModal');
-        const modalContent = document.getElementById('modal-content');
+    const modal = document.getElementById('productModal');
+    const modalContent = document.getElementById('modal-content');
 
-        modalContent.innerHTML = '';
+    // Clear stale content immediately before populating
+    modalContent.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:center;padding:60px;color:#999;">
+            <div style="text-align:center;">
+                <div style="width:36px;height:36px;border:3px solid #eee;border-top-color:#2c5530;
+                            border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 12px;"></div>
+                <p style="font-size:14px;">Loading product...</p>
+            </div>
+        </div>
+        <style>
+            @keyframes spin { to { transform: rotate(360deg); } }
+        </style>
+    `;
 
-        let imageUrl;
-        if (product.image_url) {
-            if (product.image_url.startsWith('http') || product.image_url.startsWith('/uploads/')) {
-                imageUrl = product.image_url;
-            } else if (product.image_url.startsWith('uploads/')) {
-                imageUrl = '/' + product.image_url;
-            } else {
-                imageUrl = '/uploads/' + product.image_url;
-            }
+    // Show modal immediately with loader — don't wait
+    modal.style.display = 'block';
+
+    // Resolve image URL
+    let imageUrl;
+    if (product.image_url) {
+        if (product.image_url.startsWith('http') || product.image_url.startsWith('/uploads/')) {
+            imageUrl = product.image_url;
+        } else if (product.image_url.startsWith('uploads/')) {
+            imageUrl = '/' + product.image_url;
         } else {
-            imageUrl = './uploads/default-logo.webp';
+            imageUrl = '/uploads/' + product.image_url;
         }
+    } else {
+        imageUrl = './uploads/default-logo.webp';
+    }
 
+    // Preload the image, then render content once it's ready
+    const img = new Image();
+    img.onload = () => renderContent();
+    img.onerror = () => {
+        imageUrl = './uploads/default-logo.webp';
+        renderContent();
+    };
+    img.src = imageUrl;
+
+    function renderContent() {
         modalContent.innerHTML = `
             <div class="product-detail" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:20px;">
                 <div class="product-images">
@@ -1420,10 +1447,8 @@ displayProducts(products) {
                 </div>
             </div>
         `;
-
-        modal.style.display = 'block';
     }
-
+}
     updateSectionTitle(category) {
         const title = document.getElementById('section-title');
         const categoryNames = {
