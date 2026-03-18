@@ -1,0 +1,4 @@
+.env
+node_modules/
+DATABASE_INDEXES.md
+package-lock.json
