@@ -1,213 +1,294 @@
-// 
+// ── trending.js ───────────────────────────────────────────────────────────────
+// Trending products strip.
+// Cards open app.showProductDetail(id) — the full page-view detail,
+// NOT a modal popup.  Works whether trending is on the home page or
+// has been moved into the product-detail slot by _renderProductDetailPage.
 
-// ============================================================
-// SHARED PRODUCTS CACHE
-// ============================================================
-let _productsCache = null;
+// ── Config ────────────────────────────────────────────────────────────────────
+const TRENDING_COUNT   = 12;    // how many products to show
+const TRENDING_TTL_MS  = 5 * 60 * 1000; // 5-min cache lifetime
 
-async function fetchProductsCached() {
-    if (_productsCache) return _productsCache;
-    const res = await fetch('/api/products');
-    const data = await res.json();
-    _productsCache = Array.isArray(data) ? data : [];
-    return _productsCache;
-}
+// ── State ─────────────────────────────────────────────────────────────────────
+let _trendingProducts  = [];
+let _trendingFetchedAt = 0;
 
-function resolveImageUrl(image_url) {
-    if (!image_url) return './uploads/default-logo.webp';
-    if (image_url.startsWith('http') || image_url.startsWith('/uploads/')) return image_url;
-    if (image_url.startsWith('uploads/')) return '/' + image_url;
-    return '/uploads/' + image_url;
-}
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    // Small delay so script.js / ECommerceApp has time to boot
+    setTimeout(loadTrendingProducts, 400);
+});
 
-// ============================================================
-// TRENDING CARD CLICK — opens product modal correctly
-// ============================================================
-async function handleTrendingCardClick(productId) {
-    const modal = document.getElementById('productModal');
-    const modalContent = document.getElementById('modal-content');
-    if (!modal || !modalContent) return;
+// ── Public loader (called by "Refresh picks" button too) ──────────────────────
+async function loadTrendingProducts() {
+    const scroll  = document.getElementById('trending-scroll');
+    const countEl = document.getElementById('trending-count');
+    if (!scroll) return;
 
-    // 1. Clear stale content and show spinner IMMEDIATELY
-    modalContent.innerHTML = `
-        <div style="display:flex;align-items:center;justify-content:center;min-height:300px;">
-            <div style="text-align:center;color:#999;">
-                <div style="width:40px;height:40px;
-                            border:3px solid #eee;
-                            border-top-color:#2c5530;
-                            border-radius:50%;
-                            animation:trendModalSpin 0.7s linear infinite;
-                            margin:0 auto 14px;"></div>
-                <p style="font-size:13px;margin:0;">Loading product...</p>
-            </div>
-        </div>
-        <style>
-            @keyframes trendModalSpin { to { transform: rotate(360deg); } }
-        </style>
-    `;
-    modal.style.display = 'block';
+    // Show skeleton while fetching
+    _showTrendingSkeleton(scroll);
+    if (countEl) countEl.textContent = 'Loading…';
+
+    // Use cached data if fresh
+    const now = Date.now();
+    if (_trendingProducts.length > 0 && (now - _trendingFetchedAt) < TRENDING_TTL_MS) {
+        _renderTrendingCards(_trendingProducts, scroll, countEl);
+        return;
+    }
 
     try {
-        // 2. Try cache first — no extra network request
-        let product = _productsCache?.find(p => String(p.id) === String(productId));
+        // Prefer the master product list already loaded by ECommerceApp
+        let pool = _getAppProducts();
 
-        // 3. Fallback to individual fetch if not in cache
-        if (!product) {
-            const res = await fetch(`/api/products/${productId}`);
-            product = await res.json();
+        // Fallback: fetch from API
+        if (!pool || pool.length === 0) {
+            const res = await fetch('/api/products');
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            pool = await res.json();
         }
 
-        if (!product || !product.id) {
-            throw new Error('Product not found');
+        if (!Array.isArray(pool) || pool.length === 0) {
+            throw new Error('No products available');
         }
 
-        // 4. Try app's own displayProductModal first
-        if (window.app && typeof window.app.displayProductModal === 'function') {
-            window.app.displayProductModal(product);
-            return;
-        }
+        // Pick trending: in-stock first, then shuffle, take top N
+        const inStock   = pool.filter(p => parseInt(p.stock || 0) > 0);
+        const outStock  = pool.filter(p => parseInt(p.stock || 0) <= 0);
+        const shuffled  = [..._shuffle(inStock), ..._shuffle(outStock)];
+        _trendingProducts  = shuffled.slice(0, TRENDING_COUNT);
+        _trendingFetchedAt = Date.now();
 
-        // 5. Fallback — render modal content ourselves
-        const price = parseFloat(product.price) || 0;
-        const stock = parseInt(product.stock) || 0;
-        const imageUrl = resolveImageUrl(product.image_url);
-
-        const stockBadge = stock === 0
-            ? `<span style="background:#fef2f2;color:#e74c3c;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;">Out of Stock</span>`
-            : `<span style="background:#f0fdf4;color:#16a34a;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;">${stock} in stock</span>`;
-
-        modalContent.innerHTML = `
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:20px;">
-                <div>
-                    <div style="border:2px dashed #ccc;padding:16px;border-radius:8px;background:#f9f9f9;">
-                        <img src="${imageUrl}"
-                             alt="${product.name || 'Product'}"
-                             style="width:100%;max-height:380px;object-fit:contain;border-radius:6px;"
-                             onerror="this.onerror=null;this.src='./uploads/default-logo.webp';">
-                    </div>
-                </div>
-                <div style="display:flex;flex-direction:column;gap:12px;">
-                    <h2 style="font-size:1.15em;font-weight:600;margin:0;color:#1a1a2e;line-height:1.4;">
-                        ${product.name || 'Product'}
-                    </h2>
-                    <div style="font-size:1.4em;font-weight:800;color:#2c5530;">
-                        KSH ${price.toLocaleString('en-KE', { minimumFractionDigits: 2 })}
-                    </div>
-                    ${stockBadge}
-                    <p style="margin:0;line-height:1.6;color:#555;font-size:14px;">
-                        ${product.description || 'No description available.'}
-                    </p>
-                    <button
-                        onclick="event.stopPropagation(); window.app ? app.addToCartFromButton(${product.id}) : null"
-                        ${stock <= 0 ? 'disabled' : ''}
-                        style="margin-top:auto;padding:12px 20px;font-size:14px;font-weight:600;
-                               background:${stock > 0 ? '#2c5530' : '#ccc'};
-                               color:white;border:none;border-radius:8px;
-                               cursor:${stock > 0 ? 'pointer' : 'not-allowed'};
-                               transition:opacity .2s;"
-                        onmouseover="if(${stock > 0}) this.style.opacity='0.88'"
-                        onmouseout="this.style.opacity='1'">
-                        ${stock > 0 ? '🛒 Add to Cart' : 'Out of Stock'}
-                    </button>
-                </div>
-            </div>
-        `;
+        _renderTrendingCards(_trendingProducts, scroll, countEl);
 
     } catch (err) {
-        console.error('Trending modal error:', err);
-        modalContent.innerHTML = `
-            <div style="display:flex;align-items:center;justify-content:center;min-height:300px;">
-                <div style="text-align:center;color:#e74c3c;">
-                    <div style="font-size:36px;margin-bottom:12px;">⚠️</div>
-                    <p style="font-size:14px;margin:0 0 16px;">Failed to load product.</p>
-                    <button onclick="document.getElementById('productModal').style.display='none'"
-                            style="padding:8px 20px;background:#2c5530;color:white;
-                                   border:none;border-radius:6px;cursor:pointer;font-size:13px;">
-                        Close
-                    </button>
-                </div>
-            </div>
-        `;
+        console.warn('[Trending] load failed:', err.message);
+        scroll.innerHTML = `
+            <div style="padding:20px;color:#888;font-size:13px;text-align:center;width:100%;">
+                ⚠️ Could not load trending products.
+                <button onclick="loadTrendingProducts()" style="
+                    margin-top:8px;display:block;margin-left:auto;margin-right:auto;
+                    padding:6px 16px;background:#2c5530;color:white;border:none;
+                    border-radius:6px;cursor:pointer;font-size:12px;">
+                    Retry
+                </button>
+            </div>`;
+        if (countEl) countEl.textContent = '';
     }
 }
 
-// ============================================================
-// TRENDING PRODUCTS LOADER
-// ============================================================
-async function loadTrendingProducts() {
-    const container = document.getElementById('trending-scroll');
-    const countBadge = document.getElementById('trending-count');
-    if (!container) return;
+// ── Render cards ──────────────────────────────────────────────────────────────
+function _renderTrendingCards(products, scroll, countEl) {
+    if (countEl) {
+        countEl.textContent = `${products.length} item${products.length !== 1 ? 's' : ''}`;
+    }
 
-    // Show skeletons while loading
-    container.innerHTML = Array(6).fill(0).map(() => `
-        <div class="trending-skeleton">
-            <div class="trending-skeleton-img"></div>
-            <div class="trending-skeleton-line"></div>
-            <div class="trending-skeleton-line short"></div>
+    scroll.innerHTML = products.map((p, idx) => {
+        const img     = _resolveImg(p.image_url);
+        const price   = parseFloat(p.price) || 0;
+        const stock   = parseInt(p.stock)   || 0;
+        const inStock = stock > 0;
+
+        return `
+        <div class="trending-card"
+             onclick="app.showProductDetail(${p.id})"
+             title="${_esc(p.name)}"
+             style="animation-delay:${idx * 0.05}s;cursor:pointer;">
+
+            <div class="trending-card-img-wrap" style="position:relative;">
+                <img src="${img}"
+                     alt="${_esc(p.name)}"
+                     loading="lazy"
+                     onerror="this.onerror=null;this.src='/uploads/default-logo.webp'"
+                     style="width:100%;aspect-ratio:1/1;object-fit:contain;
+                            background:#f5f5f5;border-radius:10px;display:block;padding:6px;">
+
+                ${!inStock ? `
+                <div style="position:absolute;top:6px;right:6px;background:#e74c3c;
+                            color:white;font-size:9px;font-weight:700;
+                            padding:2px 7px;border-radius:10px;letter-spacing:.3px;">
+                    Out of Stock
+                </div>` : ''}
+
+                ${inStock && idx < 3 ? `
+                <div style="position:absolute;top:6px;left:6px;
+                            background:linear-gradient(135deg,#ff6b35,#f7931e);
+                            color:white;font-size:9px;font-weight:700;
+                            padding:2px 7px;border-radius:10px;letter-spacing:.3px;">
+                    🔥 Hot
+                </div>` : ''}
+            </div>
+
+            <div class="trending-card-info" style="padding:8px 4px 4px;">
+                <div class="trending-card-name" style="
+                    font-size:12px;font-weight:600;color:#1a1a2e;line-height:1.35;
+                    margin-bottom:4px;
+                    display:-webkit-box;-webkit-line-clamp:2;
+                    -webkit-box-orient:vertical;overflow:hidden;">
+                    ${_esc(p.name)}
+                </div>
+
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:4px;">
+                    <div style="font-size:13px;font-weight:800;color:#2c5530;">
+                        Ksh ${price.toLocaleString('en-KE', { minimumFractionDigits: 2 })}
+                    </div>
+                    ${inStock ? `
+                    <button onclick="event.stopPropagation(); _trendingAddToCart(${p.id})"
+                            style="padding:3px 10px;background:linear-gradient(135deg,#2c5530,#3d7a43);
+                                   color:white;border:none;border-radius:6px;cursor:pointer;
+                                   font-size:10px;font-weight:700;white-space:nowrap;
+                                   transition:opacity .2s;"
+                            onmouseover="this.style.opacity='.82'"
+                            onmouseout="this.style.opacity='1'">
+                        + Cart
+                    </button>` : `
+                    <span style="font-size:10px;color:#e74c3c;font-weight:600;">Sold out</span>`}
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+
+    // Fade-in animation
+    scroll.querySelectorAll('.trending-card').forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(8px)';
+        setTimeout(() => {
+            card.style.transition = 'opacity .3s ease, transform .3s ease';
+            card.style.opacity    = '1';
+            card.style.transform  = 'translateY(0)';
+        }, i * 50);
+    });
+}
+
+// ── Add-to-cart from trending card ────────────────────────────────────────────
+function _trendingAddToCart(productId) {
+    // Find product in app's master list first, then in our local cache
+    const pool    = _getAppProducts();
+    let   product = (pool || []).find(p => p.id === productId)
+                 || _trendingProducts.find(p => p.id === productId);
+
+    if (product && typeof app !== 'undefined') {
+        app.addToCart(product);
+    } else {
+        console.warn('[Trending] product not found for id:', productId);
+    }
+}
+
+// ── Scroll arrows ─────────────────────────────────────────────────────────────
+function scrollTrending(direction) {
+    const scroll = document.getElementById('trending-scroll');
+    if (!scroll) return;
+    const cardWidth = (scroll.querySelector('.trending-card') || { offsetWidth: 180 }).offsetWidth + 12;
+    scroll.scrollBy({ left: direction * cardWidth * 2, behavior: 'smooth' });
+}
+
+// ── Skeleton placeholder ──────────────────────────────────────────────────────
+function _showTrendingSkeleton(scroll) {
+    scroll.innerHTML = Array(6).fill(0).map(() => `
+        <div class="trending-skeleton" style="
+            min-width:140px;max-width:160px;flex-shrink:0;border-radius:12px;
+            background:white;overflow:hidden;border:1px solid #eee;">
+            <div style="width:100%;aspect-ratio:1/1;
+                background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);
+                background-size:200% 100%;animation:trendShimmer 1.4s infinite;"></div>
+            <div style="padding:8px;">
+                <div style="height:12px;border-radius:4px;margin-bottom:6px;
+                    background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);
+                    background-size:200% 100%;animation:trendShimmer 1.4s infinite;"></div>
+                <div style="height:12px;width:60%;border-radius:4px;
+                    background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);
+                    background-size:200% 100%;animation:trendShimmer 1.4s infinite;"></div>
+            </div>
         </div>
     `).join('');
 
-    try {
-        const products = await fetchProductsCached();
-
-        if (products.length === 0) {
-            container.innerHTML = `<p style="color:#999;padding:20px;font-size:13px;">No products available.</p>`;
-            return;
-        }
-
-        const inStock = products.filter(p => (parseInt(p.stock) || 0) > 0);
-        const pool = inStock.length >= 6 ? inStock : products;
-        const trending = [...pool].sort(() => Math.random() - 0.5).slice(0, 6);
-
-        if (countBadge) countBadge.textContent = `${trending.length} picks`;
-
-        const badges = ['Hot', 'Popular', 'Top Pick', 'Trending', 'Best Seller', 'Featured'];
-
-        container.innerHTML = trending.map((product, i) => {
-            const price = parseFloat(product.price) || 0;
-            const stock = parseInt(product.stock) || 0;
-            const imageUrl = resolveImageUrl(product.image_url);
-            const stockLabel = stock === 0 ? 'Out of stock'
-                : stock < 5 ? `Only ${stock} left`
-                : `${stock} in stock`;
-            const stockClass = stock === 0 ? 'out' : stock < 5 ? 'low' : '';
-
-            return `
-                <div class="trending-card" onclick="handleTrendingCardClick(${product.id})">
-                    <div class="trending-card-badge">${badges[i % badges.length]}</div>
-                    <img src="${imageUrl}"
-                         alt="${product.name}"
-                         class="trending-card-img"
-                         loading="lazy"
-                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                    <div class="trending-card-img-placeholder" style="display:none;">📦</div>
-                    <div class="trending-card-body">
-                        <div class="trending-card-name">${product.name || 'Product'}</div>
-                        <div class="trending-card-price">
-                            KSH ${price.toLocaleString('en-KE', { minimumFractionDigits: 2 })}
-                        </div>
-                        <div class="trending-card-stock ${stockClass}">${stockLabel}</div>
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-    } catch (err) {
-        console.error('Trending load error:', err);
-        container.innerHTML = `<p style="color:#e74c3c;padding:20px;font-size:13px;">Could not load trending products.</p>`;
-        if (countBadge) countBadge.textContent = 'Error';
+    // Inject shimmer keyframe once
+    if (!document.getElementById('trending-shimmer-style')) {
+        const s = document.createElement('style');
+        s.id = 'trending-shimmer-style';
+        s.textContent = `
+            @keyframes trendShimmer {
+                0%   { background-position: 200% 0 }
+                100% { background-position: -200% 0 }
+            }
+            .trending-card {
+                min-width: 140px;
+                max-width: 165px;
+                flex-shrink: 0;
+                border-radius: 12px;
+                background: white;
+                border: 1px solid #e8ecf0;
+                overflow: hidden;
+                transition: transform .22s, border-color .22s, box-shadow .22s;
+                cursor: pointer;
+            }
+            .trending-card:hover {
+                transform: translateY(-4px);
+                border-color: #2c5530;
+                box-shadow: 0 8px 20px rgba(44,85,48,0.15);
+            }
+            .trending-scroll-wrap {
+                position: relative;
+                display: flex;
+                align-items: center;
+                gap: 0;
+            }
+            .trending-scroll {
+                display: flex;
+                gap: 12px;
+                overflow-x: auto;
+                scroll-behavior: smooth;
+                padding: 8px 4px 12px;
+                flex: 1;
+                scrollbar-width: thin;
+                scrollbar-color: #2c5530 #f0f0f0;
+            }
+            .trending-scroll::-webkit-scrollbar { height: 4px; }
+            .trending-scroll::-webkit-scrollbar-track { background: #f0f0f0; border-radius: 2px; }
+            .trending-scroll::-webkit-scrollbar-thumb { background: #2c5530; border-radius: 2px; }
+            .trending-arrow {
+                flex-shrink: 0;
+                width: 32px; height: 32px;
+                border-radius: 50%;
+                border: 1px solid #e0e0e0;
+                background: white;
+                cursor: pointer;
+                font-size: 18px;
+                display: flex; align-items: center; justify-content: center;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+                transition: background .2s, border-color .2s;
+                z-index: 2;
+            }
+            .trending-arrow:hover { background: #2c5530; color: white; border-color: #2c5530; }
+        `;
+        document.head.appendChild(s);
     }
 }
 
-function scrollTrending(dir) {
-    const el = document.getElementById('trending-scroll');
-    if (el) el.scrollBy({ left: dir * 340, behavior: 'smooth' });
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+// Get the master product list from ECommerceApp if available
+function _getAppProducts() {
+    if (typeof app !== 'undefined' && app._masterProducts && app._masterProducts.length > 0) {
+        return app._masterProducts;
+    }
+    return null;
 }
 
-// Boot
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadTrendingProducts);
-} else {
-    loadTrendingProducts();
+function _resolveImg(url) {
+    if (!url) return '/uploads/default-logo.webp';
+    if (url.startsWith('http') || url.startsWith('/uploads/')) return url;
+    if (url.startsWith('uploads/')) return '/' + url;
+    return '/uploads/' + url;
+}
+
+function _esc(str) {
+    return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function _shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
 }

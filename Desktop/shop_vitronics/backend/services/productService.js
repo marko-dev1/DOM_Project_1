@@ -24,6 +24,10 @@ class ProductService {
   static async updateStock(id, stock) {
     return await Product.updateStock(id, stock);
   }
+
+  static async searchProducts(q) {
+    return await Product.search(q);
+}
 }
 
 module.exports = ProductService;
