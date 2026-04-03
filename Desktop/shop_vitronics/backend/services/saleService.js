@@ -11,15 +11,20 @@ const createSale = async ({
 }) => {
     const date = new Date();
 
-    const sales_date = date.toISOString().split('T')[0];
-    const sales_year = date.getFullYear();
-    const sales_month = date.getMonth() + 1;
-    const sales_day = date.getDate();
+    // Use UTC dates for consistency
+    const utcDate = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+    
+    const sales_date = utcDate.toISOString().split('T')[0];
+    const sales_year = utcDate.getUTCFullYear();
+    const sales_month = utcDate.getUTCMonth() + 1;
+    const sales_day = utcDate.getUTCDate();
 
-    const sales_week = Math.ceil(
-        (((date - new Date(sales_year, 0, 1)) / 86400000) +
-            new Date(sales_year, 0, 1).getDay() + 1) / 7
-    );
+    // Calculate week number using UTC (Monday as start of week)
+    const utcTime = utcDate.getTime();
+    const yearStart = new Date(Date.UTC(sales_year, 0, 1));
+    const yearStartDay = yearStart.getUTCDay() || 7; // Convert Sunday (0) to 7
+    const daysSinceYearStart = Math.floor((utcTime - yearStart.getTime()) / (24 * 60 * 60 * 1000));
+    const sales_week = Math.ceil((daysSinceYearStart + yearStartDay) / 7);
 
     const sales_quarter = Math.ceil(sales_month / 3);
 

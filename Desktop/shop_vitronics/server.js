@@ -7,9 +7,13 @@ const userAdminRoutes = require('./backend/routes/userAdminRoutes');
 const salesRoutes = require('./backend/routes/salesRoutes');
 const productRoutes = require('./backend/routes/productRoutes');
 const orderRoutes = require('./backend/routes/orderRoutes');
-
+const purchaseRoutes = require('./backend/routes/purchaseRoutes');
 const expensesRoutes = require('./backend/routes/expensesRoutes');
 const revenueRoutes = require('./backend/routes/revenueRoutes');
+
+
+
+
 
 try {
     const salesRoutes = require('./backend/routes/salesRoutes');
@@ -61,6 +65,23 @@ app.get('/api/test', (req, res) => {
     });
 });
 
+
+app.get('/api/ai-test', async (req, res) => {
+    const Groq = require('groq-sdk');
+    const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+
+    try {
+        const result = await groq.chat.completions.create({
+            model: 'llama-3.1-8b-instant', // free model
+            messages: [{ role: 'user', content: 'Say: Groq is connected!' }]
+        });
+        res.json({ success: true, message: result.choices[0].message.content });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
+
 // Load routes directly (simplified approach)
 try { 
     app.use('/api', userAdminRoutes);
@@ -70,6 +91,8 @@ try {
     app.use('/api/orders', orderRoutes);
     app.use("/api/expenses", expensesRoutes);
     app.use('/api/revenue', revenueRoutes);
+    app.use('/api/stock-purchases', purchaseRoutes);
+   
     
     console.log('✅ All routes loaded successfully');
 } catch (error) {
@@ -174,6 +197,7 @@ app.use((req, res) => {
         ]
     });
 });
+
 
 // Start server function
 const startServer = async () => {

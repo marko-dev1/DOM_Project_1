@@ -1131,7 +1131,7 @@ class ECommerceApp {
 
     displayProducts(products) {
         this._allProducts = products;
-        this._pageSize = 20;
+        this._pageSize = 15;
         this._currentPage = 0;
         this._hasMore = true;
 
@@ -1190,8 +1190,9 @@ class ECommerceApp {
                         ${product.description ? product.description.substring(0, 70) + (product.description.length > 70 ? '...' : '') : 'No description available'}
                     </p>
                 </div>
+                
                 <div class="add-to-cart-info">
-                    <button class="add-to-cart-btn" title="Add to cart"
+                    <button class="add-to-cart-btn" title="Add to cart" 
                         onclick="event.stopPropagation(); app.addToCartFromButton(${product.id})"
                         ${product.stock <= 0 ? 'disabled' : ''}>BUY NOW</button>
                     ${product.stock > 0 ? `
@@ -1375,23 +1376,57 @@ class ECommerceApp {
                         <div style="font-size:clamp(20px,4vw,28px);font-weight:800;color:#2c5530;">
                             Ksh ${price.toLocaleString('en-KE',{minimumFractionDigits:2})}
                         </div>
-                        <div style="display:inline-flex;align-items:center;gap:6px;align-self:flex-start;padding:5px 14px;border-radius:20px;font-size:13px;font-weight:600;background:${inStock?'#e8f5e9':'#ffebee'};color:${inStock?'#2e7d32':'#c62828'};">
-                            <span style="width:7px;height:7px;border-radius:50%;flex-shrink:0;background:${inStock?'#2e7d32':'#c62828'};box-shadow:0 0 6px ${inStock?'#2e7d32':'#c62828'};"></span>
+                        <div style="display:inline-flex;
+                        align-items:center;gap:6px;
+                        align-self:flex-start;
+                        padding:5px 14px;
+                        border-radius:20px;
+                        font-size:13px;
+                        font-weight:600;
+                        background:${inStock?'#e8f5e9':'#ffebee'};color:${inStock?'#2e7d32':'#c62828'};">
+                            <span style="width:7px;
+                            height:7px;
+                            border-radius:50%;
+                            flex-shrink:0;
+                            background:${inStock?'#2e7d32':'#c62828'};box-shadow:0 0 6px ${inStock?'#2e7d32':'#c62828'};"></span>
                             ${inStock ? `${stock} in stock` : 'Out of stock'}
                         </div>
-                        <p style="font-size:14px;line-height:1.7;color:#555;margin:0;background:#f9f9f9;padding:14px;border-radius:10px;border-left:3px solid #2c5530;">
+                        <p style="font-size:14px;
+                        line-height:1.7;
+                        color:#555;margin:0;
+                        background:#f9f9f9;
+                        padding:14px;border-radius:10px;">
                             ${product.description || 'No description available.'}
                         </p>
                         ${product.category ? `<div style="font-size:12px;color:#888;">Category: <span style="background:#eef5ee;color:#2c5530;font-weight:600;padding:2px 10px;border-radius:10px;">${product.category}</span></div>` : ''}
-                        <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">
+                       <div style="display:flex;flex-direction:grid;gap:10px;margin-top:6px;align-items:flex-start;">
+
                             <button onclick="app.addToCartFromButton(${product.id})" ${!inStock?'disabled':''}
-                                    style="padding:13px 20px;font-size:15px;font-weight:700;border:none;border-radius:10px;cursor:${inStock?'pointer':'not-allowed'};background:${inStock?'linear-gradient(135deg,#2c5530,#3d7a43)':'#ccc'};color:white;transition:opacity .2s;box-shadow:${inStock?'0 4px 14px rgba(44,85,48,0.3)':'none'};"
+                                    style="padding:12px 20px;
+                                    font-size:14px;
+                                    font-weight:700;
+                                    border:none;border-radius:10px;
+                                    cursor:${inStock?'pointer':'not-allowed'};
+                                    background:${inStock?'linear-gradient(135deg,#2c5530,#3d7a43)':'#ccc'};
+                                    color:white;transition:opacity .2s;
+                                    box-shadow:${inStock?'0 4px 14px rgba(44,85,48,0.3)':'none'};"
                                     ${inStock?'onmouseover="this.style.opacity=\'.88\'" onmouseout="this.style.opacity=\'1\'"':''}>
                                 🛒 ${inStock ? 'Add to Cart' : 'Out of Stock'}
                             </button>
                             ${inStock ? `
                             <a href="https://wa.me/254703182530?text=${whatsappMsg}" target="_blank"
-                               style="display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 20px;font-size:14px;font-weight:700;border-radius:10px;text-decoration:none;background:linear-gradient(135deg,#25D366,#1aa34a);color:white;box-shadow:0 4px 14px rgba(37,211,102,0.3);transition:opacity .2s;"
+                               style="display:flex;
+                               align-items:center;
+                               justify-content:center;
+                               gap:10px;
+                               padding:12px 20px;
+                               font-size:14px;
+                               font-weight:700;
+                               border-radius:10px;
+                               text-decoration:none;
+                               background:linear-gradient(135deg,#25D366,#1aa34a);
+                               color:white;box-shadow:0 4px 14px rgba(37,211,102,0.3);
+                               transition:opacity .2s;"
                                onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
                                 <img src="/img/images/whatsapp.png" alt="WhatsApp" style="width:20px;height:20px;object-fit:contain;">
                                 Order via WhatsApp
@@ -1404,7 +1439,7 @@ class ECommerceApp {
             </div>`;
 
         _trendingIntoSlot();
-        window.scrollTo({ top: 300, behavior: 'smooth' });
+        window.scrollTo({  behavior: 'smooth' });
     }
 
     // ── Utilities ─────────────────────────────────────────────────────────────
@@ -1552,7 +1587,7 @@ class ECommerceApp {
             } else {
                 _trendingHome();
                 this._allProducts = [...(this._masterProducts.length > 0 ? this._masterProducts : this.products)];
-                this._pageSize = 20;
+                this._pageSize = 15;
                 this._currentPage = 0;
                 this._hasMore = true;
                 const grid = document.getElementById('products-grid');
@@ -1674,7 +1709,7 @@ class ECommerceApp {
     _renderSearchResults(results, query) {
         this._isSearchActive = true;
         this._allProducts = results || [];
-        this._pageSize = 20;
+        this._pageSize = 15;
         this._currentPage = 0;
         this._hasMore = true;
 
@@ -1715,7 +1750,7 @@ class ECommerceApp {
         this._currentView = 'products';
         this._currentQuery = '';
         this._allProducts = [...(this._masterProducts.length > 0 ? this._masterProducts : this.products)];
-        this._pageSize = 20;
+        this._pageSize = 15;
         this._currentPage = 0;
         this._hasMore = true;
         const title = document.getElementById('section-title');

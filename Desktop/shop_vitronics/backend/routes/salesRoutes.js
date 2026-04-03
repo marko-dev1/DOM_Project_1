@@ -48,6 +48,7 @@ router.post('/manual', auth, superAdminAuth, async (req, res) => {
             customerEmail,
             paymentMethod = 'cash',
             notes,
+            saleDate,
             items = [],
             totalAmount,
             subtotal
@@ -67,13 +68,22 @@ router.post('/manual', auth, superAdminAuth, async (req, res) => {
         // Create order ID
         const orderId = `POS-${Date.now()}`;
         
-        // Get current date components
-        const saleDate = new Date();
-        const salesYear = saleDate.getFullYear();
-        const salesMonth = saleDate.getMonth() + 1;
-        const salesWeek = Sales.getWeekNumber(saleDate);
-        const salesDay = saleDate.getDate();
-        const salesDateStr = saleDate.toISOString().split('T')[0];
+        // Use provided sale date or current date (UTC-based)
+        let saleDateObj;
+        if (saleDate) {
+            // Parse date string as UTC to avoid timezone issues
+            const [year, month, day] = saleDate.split('-').map(Number);
+            saleDateObj = new Date(Date.UTC(year, month - 1, day));
+        } else {
+            // Use current UTC date
+            const now = new Date();
+            saleDateObj = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+        }
+        const salesYear = saleDateObj.getUTCFullYear();
+        const salesMonth = saleDateObj.getUTCMonth() + 1;
+        const salesWeek = Sales.getWeekNumber(saleDateObj);
+        const salesDay = saleDateObj.getUTCDate();
+        const salesDateStr = saleDateObj.toISOString().split('T')[0];
 
         // Calculate product count and validate items
         let productCount = 0;
@@ -264,6 +274,14 @@ router.get('/stats/summary',auth, superAdminAuth, async (req, res) => {
         // Get weekly stats
         const weekStart = new Date(today);
         weekStart.setDate(today.getDate() - today.getDay());
+        
+        // If week start falls in previous month, use month start instead
+        // This ensures weekly data resets when new month begins mid-week
+        const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+        if (weekStart < monthStart) {
+            weekStart.setTime(monthStart.getTime());
+        }
+        
         const weekStartStr = weekStart.toISOString().split('T')[0];
         const weekEndStr = todayStr;
         const weeklyStats = await Sales.getSalesStatistics(weekStartStr, weekEndStr);

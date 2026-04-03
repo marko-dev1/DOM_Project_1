@@ -8,6 +8,7 @@
      <!-- <link rel="stylesheet" href="./frontend/public/assets/css/dash.css"> -->
         <link rel="icon" type="image/png" href="/assets/logo/vtl.png">
      <link rel="stylesheet" href="/assets/css/dash.css">
+     
     <!-- <link rel="stylesheet" href="../assets/css/print.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -17,9 +18,6 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-      
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
 </head>
 <body>
     <div class="dashboard-container">
@@ -47,82 +45,89 @@
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- Dashboard Section -->
+
+            <!-- ══════════════════════════════════════════════
+                 DASHBOARD SECTION
+            ══════════════════════════════════════════════ -->
             <div id="dashboard" class="content-section active">
                 <h1>Dashboard Overview</h1>
+
+                <!-- Overview stat cards -->
                 <div class="stats-grid">
-                    <div class="stat-card-1">
-                       <h3>Total Products</h3> 
-                        <div class="stat-number" id="totalProducts">0</div>
-                    </div>
-                    <div class="stat-card-2">
-                        <h3>Total Orders</h3>
-                        <div class="stat-number" id="totalOrders">0</div>
-                    </div>
-                    <div class="stat-card-3">
-                        <h3>Pending Orders</h3>
-                        <div class="stat-number" id="pendingOrders">0</div>
-                    </div>
-                    <div class="stat-card-4">
-                        <h3>Total Admins</h3>
-                        <div class="stat-number" id="totalAdmins">0</div>
-                    </div>
-                    <div class="stat-card-5">
-                        <h3>Total Users</h3>
-                        <div class="stat-number" id="totalUsers">0</div>
-                    </div>
-                    <!-- Inventory Stats Cards -->
-                    <div class="stat-card-6">
-                        <h3>Inventory Value</h3>
-                        <div class="stat-number" id="totalInventoryValue">KSH 0</div>
-                        <div class="stat-desc" id="inventoryItemCount">0 items</div>
-                    </div>
-                    <div class="stat-card-7">
-                        <h3>Low Stock</h3>
-                        <div class="stat-number" id="lowStockCount">0</div>
-                        <div class="stat-desc">Needs restocking</div>
-                    </div>
-                    <div class="stat-card-8">
-                        <h3>Out of Stock</h3>
-                        <div class="stat-number" id="outOfStockCount">0</div>
-                        <div class="stat-desc">Urgent attention</div>
-                    </div>
-                </div> 
-                 <!-- NEW: Weekly Profit Card -->
-<div class="revenue-stats">
-        <div class="stat-card-9" style="margin: 15px;">
-            <h3>📊 Weekly Review</h3>
-            <div class="stat-number" id="weeklyRevenue">0</div>
-            <div class="stat-desc">
-                <!-- <small>Revenue: <span id="weeklyRevenue">0</span></small><br> -->
-                <small>Expenses: <span id="weeklyExpenses">0</span></small><br>
-                <small>Net: <span id="weeklyNetRevenue">0</span></small>
-            </div>
-        </div>
-        
-        <!-- NEW: Monthly Profit Card -->
-         <div class="stat-card-10" style="margin: 15px;">
-            <h3>📈 Monthly Review</h3>
-            <div class="stat-number" id="monthlyRevenue">0</div>
-            <div class="stat-desc">
-                <!-- <small>Revenue: <span id="monthlyRevenue">0</span></small><br> -->
-                <small>Expenses: <span id="monthlyExpenses">0</span></small><br>
-                <small>Net: <span id="monthlyNetRevenue">0</span></small>
-            </div>
-        </div>
 
-           <div class="stat-card-9" style="margin: 15px;">
-            <h3>📊 Repairs & Services</h3>
-            <div class="stat-number" id="RepairsRevenue">0</div>
-            <div class="stat-desc">
-                <small>Cash: <span id="RepairsCashRevenue">0</span></small><br>
-                <small>Mpesa: <span id="RepairsMpesaRevenue">0</span></small><br>
-                <small>Total: <span id="RepairsNetRevenue">0</span></small>
-            </div>
-        </div>
-        </div>
+                    <div class="sp-stat-card sp-stat-blue">
+                        <div class="sp-stat-label">Total Products</div>
+                        <div class="sp-stat-value" id="totalProducts">0</div>
+                    </div>
 
-                
+                    <div class="sp-stat-card sp-stat-purple">
+                        <div class="sp-stat-label">Total Orders</div>
+                        <div class="sp-stat-value" id="totalOrders">0</div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-orange">
+                        <div class="sp-stat-label">Pending Orders</div>
+                        <div class="sp-stat-value" id="pendingOrders">0</div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-gray">
+                        <div class="sp-stat-label">Total Admins</div>
+                        <div class="sp-stat-value" id="totalAdmins">0</div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-blue">
+                        <div class="sp-stat-label">Total Users</div>
+                        <div class="sp-stat-value" id="totalUsers">0</div>
+                    </div>
+
+                    <!-- Inventory Stats -->
+                    <div class="sp-stat-card sp-stat-green">
+                        <div class="sp-stat-label">Inventory Value</div>
+                        <div class="sp-stat-value" id="totalInventoryValue">KSH 0</div>
+                        <div class="sp-stat-sub" id="inventoryItemCount">0 items</div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-orange">
+                        <div class="sp-stat-label">Low Stock</div>
+                        <div class="sp-stat-value" id="lowStockCount">0</div>
+                        <div class="sp-stat-sub">Needs restocking</div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-red">
+                        <div class="sp-stat-label">Out of Stock</div>
+                        <div class="sp-stat-value" id="outOfStockCount">0</div>
+                        <div class="sp-stat-sub">Urgent attention</div>
+                    </div>
+
+                </div>
+
+                <!-- Weekly / Monthly / Repairs review cards -->
+                <div class="stats-grid">
+
+                    <div class="sp-stat-card sp-stat-blue">
+                        <div class="sp-stat-label">📊 Weekly Review</div>
+                        <div class="sp-stat-value" id="weeklyRevenue">0</div>
+                        <div class="sp-stat-sub">Expenses: <span id="weeklyExpenses">0</span></div>
+                        <div class="sp-stat-sub">Net: <span id="weeklyNetRevenue">0</span></div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-purple">
+                        <div class="sp-stat-label">📈 Monthly Review</div>
+                        <div class="sp-stat-value" id="monthlyRevenue">0</div>
+                        <div class="sp-stat-sub">Expenses: <span id="monthlyExpenses">0</span></div>
+                        <div class="sp-stat-sub">Net: <span id="monthlyNetRevenue">0</span></div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-green">
+                        <div class="sp-stat-label">📊 Repairs &amp; Services</div>
+                        <div class="sp-stat-value" id="RepairsRevenue">0</div>
+                        <div class="sp-stat-sub">Cash: <span id="RepairsCashRevenue">0</span></div>
+                        <div class="sp-stat-sub">Mpesa: <span id="RepairsMpesaRevenue">0</span></div>
+                        <div class="sp-stat-sub">Total: <span id="RepairsNetRevenue">0</span></div>
+                    </div>
+
+                </div>
+
                 <!-- Inventory Alerts Section -->
                 <div class="section-container" style="margin-top: 30px;">
                     <h2>Inventory Status</h2>
@@ -132,687 +137,566 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════
+                 INVENTORY SECTION
+            ══════════════════════════════════════════════ -->
+            <div id="inventory" class="content-section">
+                <div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 20px;">
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="inventorySearch" placeholder="Search inventory..."
+                                           onkeyup="searchInventory(this.value)" class="form-control" style="width: 250px;" />
+                        <button class="btn btn-sm py-0 btn-success" onclick="showBulkRestock()">Bulk Restock</button>
+                    </div>
                 </div>
-                
-                <!-- Inventory Management Section -->
-                <div id="inventory" class="content-section">
-                    <div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 20px;">
-                        <!-- <h1>Inventory Management</h1> -->
-                        <div style="display: flex; gap: 10px;">
-                            <input type="text" id="inventorySearch" placeholder="Search inventory..."
-                                               onkeyup="searchInventory(this.value)" class="form-control" style="width: 250px;" />
-                            <button class="btn btn-sm py-0 btn-success" onclick="showBulkRestock()">
-                                            Bulk Restock
-                                        </button>
-                        </div>
-                    </div>
-                
-                    <!-- Inventory Stats Bar -->
-                    <div class="inventory-stats-bar">
-                        <div><strong>Total Items:</strong> <span id="totalInventoryItems">0</span></div>
-                        <div><strong>Total Value:</strong> <span id="inventoryTotalValue">KSH 0</span></div>
-                        <div><strong>Avg Stock Level:</strong> <span id="averageStock">0</span></div>
-                        <div><strong>Restock Alerts:</strong> <span id="totalRestockAlerts">0</span></div>
-                        <div><strong>Stock qty:</strong> <span id="stockQuantity ">0</span></div>
-                    </div>
-                
-                    <!-- Inventory Table -->
-                    <div id="inventoryTable">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Current Stock</th>
-                                    <th>Restock Level</th>
-                                    <th>Stock Status</th>
-                                    <th>Value (KSH)</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="inventoryList">
-                                <!-- Inventory items will be loaded here -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- Inventory Pagination -->
+
+                <!-- Inventory Stats Bar -->
+                <div class="inventory-stats-bar">
+                    <div><strong>Total Items:</strong> <span id="totalInventoryItems">0</span></div>
+                    <div><strong>Total Value:</strong> <span id="inventoryTotalValue">KSH 0</span></div>
+                    <div><strong>Avg Stock Level:</strong> <span id="averageStock">0</span></div>
+                    <div><strong>Restock Alerts:</strong> <span id="totalRestockAlerts">0</span></div>
+                    <div><strong>Stock qty:</strong> <span id="stockQuantity">0</span></div>
+                </div>
+
+                <!-- Inventory Table -->
+                <div id="inventoryTable">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Current Stock</th>
+                                <th>Restock Level</th>
+                                <th>Stock Status</th>
+                                <th>Value (KSH)</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryList"></tbody>
+                    </table>
+                </div>
+
                 <div class="pagination-section" style="margin-top: 12px;">
                     <button class="btn-pagination" onclick="prevInventoryPage()" id="prevInventoryBtn" disabled>← Previous</button>
                     <span id="inventoryPageInfo">Page 1 of 1</span>
                     <button class="btn-pagination" onclick="nextInventoryPage()" id="nextInventoryBtn" disabled>Next →</button>
                 </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════
+                 SALES SECTION
+            ══════════════════════════════════════════════ -->
+            <div id="sales" class="content-section">
+                <div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 20px;">
+                    <div style="display: flex; gap: 5px;">
+                        <input type="text" id="salesSearch" placeholder="Search sales..."
+                                           onkeyup="debouncedSearchSales(this.value)"
+                                           class="form-control" style="width: 200px;" />
+                        <button class="btn btn-sm py-0 btn-info" onclick="showNewSaleModal()">New Sale</button>
+                        <button class="btn btn-sm py-0 btn-warning" onclick="generateSalesReport()">Reports</button>
+                    </div>
                 </div>
-                
-                <!-- Sales Management Section -->
-                <div id="sales" class="content-section">
-                    <div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 20px;">
-                        <!-- <h1>Sales Management</h1> -->
-                        <div style="display: flex; gap: 5px;">
-                            <!-- <input type="text" id="salesSearch" placeholder="Search sales..."
-                                               onkeyup="searchSales(this.value)" class="form-control" style="width: 200px;" /> -->
-                         <input type="text" id="salesSearch" placeholder="Search sales..."
-                                            onkeyup="debouncedSearchSales(this.value)" 
-                                            class="form-control" style="width: 200px;" />
-                            <button class="btn btn-sm py-0 btn-info" onclick="showNewSaleModal()">
-                                           New Sale
-                                        </button>
-                            <button class="btn btn-sm py-0 btn-warning" onclick="generateSalesReport()">
-                                            Reports
-                                        </button>
+
+                <!-- Sales Stats Bar -->
+                <div class="sales-stats-bar">
+                    <div><strong>Today's sales:</strong> <span id="dailySalesTotal">0</span></div>
+                    <div><strong>Profit:</strong> <span id="todayProfit">0</span></div>
+                    <div><strong>Week:</strong> <span id="weeklySalesTotal">0</span></div>
+                    <div><strong>Month:</strong> <span id="monthlySalesTotal">0</span></div>
+                    <div><strong>Total Sales:</strong> <span id="allTimeSales">0</span></div>
+                    <div><strong>Total Profit:</strong> <span id="totalProfit" style="color: green;">0</span></div>
+                </div>
+
+                <!-- Sales Table -->
+                <div id="salesTable">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Sale ID</th>
+                                <th>Customer</th>
+                                <th>Items</th>
+                                <th>Amount</th>
+                                <th>Payment</th>
+                                <th>Status</th>
+                                <th>Date & Time</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="salesList"></tbody>
+                    </table>
+                </div>
+
+                <div class="pagination-section" style="margin-top:12px;">
+                    <button class="btn-pagination" onclick="prevSalesPage()" id="prevSalesBtn" disabled>← Previous</button>
+                    <span id="salesPageInfo">Page 1 of 1</span>
+                    <button class="btn-pagination" onclick="nextSalesPage()" id="nextSalesBtn" disabled>Next →</button>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════
+                 REVENUE SECTION
+            ══════════════════════════════════════════════ -->
+            <div id="revenue" class="content-section">
+                <div class="section-header">
+                    <div class="header-title">
+                        <h1>Revenue Management</h1>
+                        <p class="text-muted">Sales business income</p>
+                    </div>
+                </div>
+
+                <!-- Revenue stat cards -->
+                <div class="stats-grid">
+                    <div class="sp-stat-card sp-stat-red">
+                        <div class="sp-stat-label">Today</div>
+                        <div class="sp-stat-value" id="todayRevenue">0</div>
+                        <div class="sp-stat-sub" id="todayRevenueCount">0 transactions</div>
+                        <div class="sp-stat-sub">Profit: <span id="todayProfitRevenue">0</span></div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-blue">
+                        <div class="sp-stat-label">This Week</div>
+                        <div class="sp-stat-value" id="weekRevenue">0</div>
+                        <div class="sp-stat-sub" id="weekRevenueCount">0 transactions</div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-purple">
+                        <div class="sp-stat-label">This Month</div>
+                        <div class="sp-stat-value" id="monthRevenue">0</div>
+                        <div class="sp-stat-sub" id="monthRevenueCount">0 transactions</div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-green">
+                        <div class="sp-stat-label">Total Revenue</div>
+                        <div class="sp-stat-value" id="totalRevenueAll">0</div>
+                        <div class="sp-stat-sub">All time</div>
+                    </div>
+                </div>
+
+                <!-- Revenue Summary Cards -->
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="summary-title">Average Transaction</div>
+                        <div class="summary-value" id="avgRevenue">0</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-title">Highest Transaction</div>
+                        <div class="summary-value" id="maxRevenue">0</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-title">Most Used Method</div>
+                        <div class="summary-value" id="topPaymentMethod">-</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-title">Profit Margin</div>
+                        <div class="summary-value" id="profitMargin">0%</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-title">Net Revenue</div>
+                        <div class="summary-value" id="netRevenue">0</div>
+                    </div>
+                </div>
+
+                <!-- Revenue & Expenses Breakdown Chart -->
+                <div class="chart-container" style="margin: 20px 0; background: white; padding: 20px; border-radius: 8px; max-width: 500px;">
+                    <h3>Revenue & Expenses Breakdown</h3>
+                    <canvas id="revenueBreakdownChart" style="width: 100%; height: 300px;"></canvas>
+                </div>
+
+                <!-- Payment Method Breakdown -->
+                <div class="payment-breakdown">
+                    <h3>Payment Methods</h3>
+                    <div class="payment-grid">
+                        <div class="payment-card cash">
+                            <div class="payment-icon">💵</div>
+                            <div class="payment-details">
+                                <span class="payment-label">Cash</span>
+                                <span class="payment-amount" id="cashRevenue">KSH 0</span>
+                                <span class="payment-count" id="cashCount">0 transactions</span>
+                            </div>
+                        </div>
+                        <div class="payment-card mpesa">
+                            <div class="payment-icon">📱</div>
+                            <div class="payment-details">
+                                <span class="payment-label">M-Pesa</span>
+                                <span class="payment-amount" id="mpesaRevenue">KSH 0</span>
+                                <span class="payment-count" id="mpesaCount">0 transactions</span>
+                            </div>
+                        </div>
+                        <div class="payment-card card">
+                            <div class="payment-icon">💳</div>
+                            <div class="payment-details">
+                                <span class="payment-label">Card</span>
+                                <span class="payment-amount" id="cardRevenue">KSH 0</span>
+                                <span class="payment-count" id="cardCount">0 transactions</span>
+                            </div>
+                        </div>
+                        <div class="payment-card bank">
+                            <div class="payment-icon">🏦</div>
+                            <div class="payment-details">
+                                <span class="payment-label">Bank Transfer</span>
+                                <span class="payment-amount" id="bankRevenue">KSH 0</span>
+                                <span class="payment-count" id="bankCount">0 transactions</span>
+                            </div>
                         </div>
                     </div>
-           
-                    <!-- Sales Stats Bar -->
-                    <div class="sales-stats-bar">
-                        <div><strong>Today's sales:</strong> <span id="dailySalesTotal">0</span></div>
-                         <div><strong>Profit:</strong> <span id="todayProfit">0</span></div>
-                        <div><strong>Week:</strong> <span id="weeklySalesTotal">0</span></div>
-                        <div><strong>Month:</strong> <span id="monthlySalesTotal">0</span></div>
-                        <div><strong>Total Sales:</strong> <span id="allTimeSales">0</span></div>
-                        <div><strong>Total Profit:</strong> <span id="totalProfit" style="color: green;">0</span></div>
-                    
+                </div>
+
+                <!-- Filters and Search -->
+                <div class="filters-section">
+                    <div class="search-box">
+                        <input type="text" id="revenueSearch" class="form-control"
+                               placeholder="🔍 Search by customer or ID..."
+                               onkeyup="searchRevenue()">
                     </div>
-                
-                    <!-- Sales Table -->
-                    <div id="salesTable">
+                    <div class="filter-group">
+                        <select id="revenueFilter" class="form-control" onchange="loadRevenue()">
+                            <option value="day">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="all" selected>All Time</option>
+                        </select>
+                        <select id="paymentMethodFilter" class="form-control" onchange="loadRevenue()">
+                            <option value="">All Payments</option>
+                            <option value="cash">Cash</option>
+                            <option value="mpesa">M-Pesa</option>
+                            <option value="card">Card</option>
+                            <option value="bank_transfer">Bank Transfer</option>
+                        </select>
+                        <input type="date" id="revenueDateFrom" class="form-control" onchange="loadRevenue()" placeholder="From">
+                        <input type="date" id="revenueDateTo" class="form-control" onchange="loadRevenue()" placeholder="To">
+                        <button class="btn btn-secondary" onclick="resetRevenueFilters()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <div class="quick-stat-item">
+                        <span class="stat-name">Total Transactions:</span>
+                        <span class="stat-number" id="totalTransactions">0</span>
+                    </div>
+                    <div class="quick-stat-item">
+                        <span class="stat-name">Online Sales:</span>
+                        <span class="stat-number" id="onlineSales">KSH 0</span>
+                    </div>
+                    <div class="quick-stat-item">
+                        <span class="stat-name">POS Sales:</span>
+                        <span class="stat-number" id="posSales">KSH 0</span>
+                    </div>
+                    <div class="quick-stat-item">
+                        <span class="stat-name">Avg Order Value:</span>
+                        <span class="stat-number" id="avgOrderValue">KSH 0</span>
+                    </div>
+                </div>
+
+                <!-- Export Options -->
+                <div class="export-section">
+                    <button class="btn btn-success" onclick="exportRevenueToCSV()">📥 Export to CSV</button>
+                    <button class="btn btn-info" onclick="printRevenueReport()">🖨️ Print Report</button>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-section">
+                    <button class="btn-pagination" onclick="prevRevenuePage()" id="prevRevenueBtn" disabled>← Previous</button>
+                    <span id="revenuePageInfo">Page 1 of 1</span>
+                    <button class="btn-pagination" onclick="nextRevenuePage()" id="nextRevenueBtn" disabled>Next →</button>
+                </div>
+            </div>
+
+            <!-- Add Revenue Modal -->
+            <div id="addRevenueModal" class="modal">
+                <div class="modal-content" style="max-width: 500px;">
+                    <div class="modal-header">
+                        <h2>Add Manual Revenue</h2>
+                        <span class="close" onclick="closeAddRevenueModal()">✖</span>
+                    </div>
+                    <form id="addRevenueForm">
+                        <div class="form-group">
+                            <label>Description/Source</label>
+                            <input type="text" id="revenueDescription" class="form-control"
+                                   placeholder="e.g., Service fee, Consultation, etc." required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Amount (KSH)</label>
+                                <input type="number" id="revenueAmount" class="form-control"
+                                       placeholder="0.00" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Payment Method</label>
+                                <select id="revenuePayment" class="form-control" required>
+                                    <option value="cash">Cash</option>
+                                    <option value="mpesa">M-Pesa</option>
+                                    <option value="card">Card</option>
+                                    <option value="bank_transfer">Bank Transfer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="revenueCategory" class="form-control" required>
+                                    <option value="sales">Product Sales</option>
+                                    <option value="service">Services</option>
+                                    <option value="repair">Repairs</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>📅 Date</label>
+                                <input type="datetime-local" id="revenueDate" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Customer Name (Optional)</label>
+                            <input type="text" id="revenueCustomer" class="form-control" placeholder="Walk-in Customer">
+                        </div>
+                        <div class="form-group">
+                            <label>Notes</label>
+                            <textarea id="revenueNotes" class="form-control" rows="2" placeholder="Additional details..."></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="closeAddRevenueModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">💾 Save Revenue</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Revenue Details Modal -->
+            <div id="revenueDetailsModal" class="modal">
+                <div class="modal-content" style="max-width: 600px;">
+                    <div class="modal-header">
+                        <h2>📄 Revenue Details</h2>
+                        <span class="close" onclick="closeRevenueDetailsModal()">✖</span>
+                    </div>
+                    <div id="revenueDetailsContent"></div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════
+                 REPAIRS & SERVICES SECTION
+            ══════════════════════════════════════════════ -->
+            <div id="repairs-services" class="content-section">
+                <div class="section-header">
+                    <div class="header-title">
+                        <h1>Repairs &amp; Services Revenue</h1>
+                        <p class="text-muted">Repairs and service revenue</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="showAddRepairsServicesModal()">
+                        <i class="fas fa-plus"></i> Add Service
+                    </button>
+                </div>
+
+                <!-- Repairs & Services stat cards -->
+                <div class="stats-grid">
+                    <div class="sp-stat-card sp-stat-red">
+                        <div class="sp-stat-label">Today</div>
+                        <div class="sp-stat-value" id="todayServicesRevenue">KSH 0</div>
+                        <div class="sp-stat-sub" id="todayServicesCount">0 services</div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-blue">
+                        <div class="sp-stat-label">This Week</div>
+                        <div class="sp-stat-value" id="weekServicesRevenue">KSH 0</div>
+                        <div class="sp-stat-sub" id="weekServicesCount">0 services</div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-purple">
+                        <div class="sp-stat-label">This Month</div>
+                        <div class="sp-stat-value" id="monthServicesRevenue">KSH 0</div>
+                        <div class="sp-stat-sub" id="monthServicesCount">0 services</div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-green">
+                        <div class="sp-stat-label">Total Services Revenue</div>
+                        <div class="sp-stat-value" id="totalServicesRevenue">KSH 0</div>
+                        <div class="sp-stat-sub">All time</div>
+                    </div>
+                </div>
+
+                <!-- Service Type Breakdown -->
+                <div class="service-breakdown">
+                    <h3 class="breakdown-title">Breakdown</h3>
+                    <div class="service-cards">
+                        <div class="service-card repairs">
+                            <div class="service-icon-wrapper">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                                </svg>
+                            </div>
+                            <div class="service-details">
+                                <span class="service-label">Repairs</span>
+                                <span class="service-amount" id="repairsAmount">KSH 0</span>
+                                <span class="service-count" id="repairsCount">0 items</span>
+                            </div>
+                        </div>
+                        <div class="service-card services">
+                            <div class="service-icon-wrapper">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+                                </svg>
+                            </div>
+                            <div class="service-details">
+                                <span class="service-label">Services</span>
+                                <span class="service-amount" id="maintenanceAmount">KSH 0</span>
+                                <span class="service-count" id="maintenanceCount">0 items</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Repairs & Services List -->
+                <div class="services-list" style="background: white; padding: 20px; border-radius: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h3 style="margin: 0;">Recent Services</h3>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <label for="servicesMonthFilter" style="margin: 0; font-weight: 500;">Filter by Month:</label>
+                            <select id="servicesMonthFilter" class="form-control" style="width: 200px; padding: 8px;">
+                                <option value="">All Months</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="servicesTableContainer">
                         <table class="table">
-                            <thead >
-                                <tr >
-                                    <th>Sale ID</th>
+                            <thead>
+                                <tr>
+                                    <th>Service Type</th>
                                     <th>Customer</th>
-                                    <th>Items</th>
+                                    <th>Description</th>
                                     <th>Amount</th>
-                                    <th>Payment</th>
+                                    <th>Payment Method</th>
                                     <th>Status</th>
-                                    <th>Date & Time</th>
-                                    <th>Actions</th>
+                                    <th>Date</th>
                                 </tr>
                             </thead>
-                            <tbody id="salesList">
-                                <!-- Sales will be loaded here -->
+                            <tbody id="servicesTableBody">
+                                <tr>
+                                    <td colspan="7" style="text-align: center; padding: 20px;">No services recorded yet</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
-                    <!-- Sales Pagination (affects sales list only) -->
-                    <div class="pagination-section" style="margin-top:12px;">
-                        <button class="btn-pagination" onclick="prevSalesPage()" id="prevSalesBtn" disabled>
-                            ← Previous
-                        </button>
-                        <span id="salesPageInfo">Page 1 of 1</span>
-                        <button class="btn-pagination" onclick="nextSalesPage()" id="nextSalesBtn" disabled>
-                            Next →
-                        </button>
+                </div>
+
+                <div class="pagination-section" style="margin-top:12px;">
+                    <button class="btn-pagination" onclick="prevServicesPage()" id="prevServicesBtn" disabled>← Previous</button>
+                    <span id="servicesPageInfo">Page 1 of 1</span>
+                    <button class="btn-pagination" onclick="nextServicesPage()" id="nextServicesBtn" disabled>Next →</button>
+                </div>
+            </div>
+
+            <!-- Add Repairs & Services Modal -->
+            <div id="addRepairsServicesModal" class="modal">
+                <div class="modal-content" style="max-width: 600px;">
+                    <div class="modal-header">
+                        <h2>Add Repairs &amp; Services</h2>
+                        <span class="close" onclick="closeAddRepairsServicesModal()">✖</span>
                     </div>
-                </div>
-
-                <!-- Revenue Management Section -->
-<div id="revenue" class="content-section">
-    <div class="section-header">
-        <div class="header-title">
-            <h1>Revenue Management</h1>
-            <p class="text-muted">Sales business income</p>
-        </div>
-        <!-- <button class="btn btn-primary" onclick="showAddRevenueModal()">
-            <i class="fas fa-plus"></i> Add Revenue
-        </button> -->
-    </div>
-
-    <!-- Revenue Statistics Cards -->
-    <div class="stats-grid">
-       
-
-        <div class="stat-card today-revenue">
-            <div class="stat-details">
-                <span class="stat-label">Today</span>
-                <span class="stat-value" id="todayRevenue">0</span>
-                <span class="stat-period" id="todayRevenueCount">0 transactions</span>
-                <div class="stat-desc">Today's profit: <span id="todayProfitRevenue" style="color: rgb(245, 246, 245);">0</span></div>
-            </div>
-        </div>
-
-        <div class="stat-card week-revenue">
-            <div class="stat-details">
-                <span class="stat-label">This Week</span>
-                <span class="stat-value" id="weekRevenue">0</span>
-                <span class="stat-period" id="weekRevenueCount">0 transactions</span>
-            </div>
-        </div>
-
-        <div class="stat-card month-revenue">
-            <div class="stat-details">
-                <span class="stat-label">This Month</span>
-                <span class="stat-value" id="monthRevenue">0</span>
-                <span class="stat-period" id="monthRevenueCount">0 transactions</span>
-            </div>
-        </div>
-
-         <div class="stat-card total-revenue">
-            <div class="stat-details">
-                <span class="stat-label">Total Revenue</span>
-                <span class="stat-value" id="totalRevenueAll">0</span>
-                <span class="stat-period">All time</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Revenue Summary Cards -->
-    <div class="summary-cards">
-        <div class="summary-card">
-            <div class="summary-title">Average Transaction</div>
-            <div class="summary-value" id="avgRevenue">0</div>
-        </div>
-        <div class="summary-card">
-            <div class="summary-title">Highest Transaction</div>
-            <div class="summary-value" id="maxRevenue">0</div>
-        </div>
-        <div class="summary-card">
-            <div class="summary-title">Most Used Method</div>
-            <div class="summary-value" id="topPaymentMethod">-</div>
-        </div>
-        <div class="summary-card">
-            <div class="summary-title">Profit Margin</div>
-            <div class="summary-value" id="profitMargin">0%</div>
-        </div>
-        <div class="summary-card">
-            <div class="summary-title">Net Revenue</div>
-            <div class="summary-value" id="netRevenue">0</div>
-        </div>
-    </div>
-
-    <!-- Revenue & Expenses Breakdown - Circular Chart -->
-    <div class="chart-container" style="margin: 20px 0; background: white; padding: 20px; border-radius: 8px; max-width: 500px;">
-        <h3>Revenue & Expenses Breakdown</h3>
-        <canvas id="revenueBreakdownChart" style="width: 100%; height: 300px;"></canvas>
-    </div>
-
-    <!-- Revenue vs Expenses Chart -->
-    <!-- <div class="chart-container" >
-        <h3>📊 Revenue vs Expenses (Last 7 Days)</h3>
-        <canvas id="revenueChart" style="width: 100%; height: 300px;"></canvas>
-    </div> -->
-
-    <!-- Payment Method Breakdown -->
-    <div class="payment-breakdown">
-        <h3>Payment Methods</h3>
-        <div class="payment-grid">
-            <div class="payment-card cash">
-                <div class="payment-icon">💵</div>
-                <div class="payment-details">
-                    <span class="payment-label">Cash</span>
-                    <span class="payment-amount" id="cashRevenue">KSH 0</span>
-                    <span class="payment-count" id="cashCount">0 transactions</span>
-                </div>
-            </div>
-            <div class="payment-card mpesa">
-                <div class="payment-icon">📱</div>
-                <div class="payment-details">
-                    <span class="payment-label">M-Pesa</span>
-                    <span class="payment-amount" id="mpesaRevenue">KSH 0</span>
-                    <span class="payment-count" id="mpesaCount">0 transactions</span>
-                </div>
-            </div>
-            <div class="payment-card card">
-                <div class="payment-icon">💳</div>
-                <div class="payment-details">
-                    <span class="payment-label">Card</span>
-                    <span class="payment-amount" id="cardRevenue">KSH 0</span>
-                    <span class="payment-count" id="cardCount">0 transactions</span>
-                </div>
-            </div>
-            <div class="payment-card bank">
-                <div class="payment-icon">🏦</div>
-                <div class="payment-details">
-                    <span class="payment-label">Bank Transfer</span>
-                    <span class="payment-amount" id="bankRevenue">KSH 0</span>
-                    <span class="payment-count" id="bankCount">0 transactions</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Filters and Search -->
-    <div class="filters-section">
-        <div class="search-box">
-            <input type="text"
-                   id="revenueSearch"
-                   class="form-control"
-                   placeholder="🔍 Search by customer or ID..."
-                   onkeyup="searchRevenue()">
-        </div>
-
-        <div class="filter-group">
-            <select id="revenueFilter" class="form-control" onchange="loadRevenue()">
-                <option value="day">Today</option>
-                <option value="week">This Week</option>
-                <option value="month">This Month</option>
-                <option value="all" selected>All Time</option>
-            </select>
-
-            <select id="paymentMethodFilter" class="form-control" onchange="loadRevenue()">
-                <option value="">All Payments</option>
-                <option value="cash">Cash</option>
-                <option value="mpesa">M-Pesa</option>
-                <option value="card">Card</option>
-                <option value="bank_transfer">Bank Transfer</option>
-            </select>
-
-            <input type="date" id="revenueDateFrom" class="form-control" onchange="loadRevenue()" placeholder="From">
-            <input type="date" id="revenueDateTo" class="form-control" onchange="loadRevenue()" placeholder="To">
-
-            <button class="btn btn-secondary" onclick="resetRevenueFilters()">
-                <i class="fas fa-redo"></i> Reset
-            </button>
-        </div>
-    </div>
-
-    <!-- Quick Stats -->
-    <div class="quick-stats">
-        <div class="quick-stat-item">
-            <span class="stat-name">Total Transactions:</span>
-            <span class="stat-number" id="totalTransactions">0</span>
-        </div>
-        <div class="quick-stat-item">
-            <span class="stat-name">Online Sales:</span>
-            <span class="stat-number" id="onlineSales">KSH 0</span>
-        </div>
-        <div class="quick-stat-item">
-            <span class="stat-name">POS Sales:</span>
-            <span class="stat-number" id="posSales">KSH 0</span>
-        </div>
-        <div class="quick-stat-item">
-            <span class="stat-name">Avg Order Value:</span>
-            <span class="stat-number" id="avgOrderValue">KSH 0</span>
-        </div>
-    </div>
-
-    <!-- Export Options -->
-    <div class="export-section">
-        <button class="btn btn-success" onclick="exportRevenueToCSV()">
-            📥 Export to CSV
-        </button>
-        <button class="btn btn-info" onclick="printRevenueReport()">
-            🖨️ Print Report
-        </button>
-    </div>
-
-    
-    <!-- Pagination -->
-    <div class="pagination-section">
-        <button class="btn-pagination" onclick="prevRevenuePage()" id="prevRevenueBtn" disabled>
-            ← Previous
-        </button>
-        <span id="revenuePageInfo">Page 1 of 1</span>
-        <button class="btn-pagination" onclick="nextRevenuePage()" id="nextRevenueBtn" disabled>
-            Next →
-        </button>
-    </div>
-</div>
-
-<!-- Add Revenue Modal (for manual revenue entries) -->
-<div id="addRevenueModal" class="modal">
-    <div class="modal-content" style="max-width: 500px;">
-        <div class="modal-header">
-            <h2> Add Manual Revenue</h2>
-            <span class="close" onclick="closeAddRevenueModal()">✖</span>
-        </div>
-
-        <form id="addRevenueForm">
-            <div class="form-group">
-                <label>Description/Source</label>
-                <input type="text" id="revenueDescription" class="form-control" 
-                       placeholder="e.g., Service fee, Consultation, etc." required>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Amount (KSH)</label>
-                    <input type="number" id="revenueAmount" class="form-control" 
-                           placeholder="0.00" min="0" step="0.01" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Payment Method</label>
-                    <select id="revenuePayment" class="form-control" required>
-                        <option value="cash">Cash</option>
-                        <option value="mpesa">M-Pesa</option>
-                        <option value="card">Card</option>
-                        <option value="bank_transfer">Bank Transfer</option>
-                    </select>
+                    <form id="addRepairsServicesForm">
+                        <div class="form-group">
+                            <label>Service Type</label>
+                            <select id="serviceType" class="form-control" required>
+                                <option value="">Select Service Type</option>
+                                <option value="repair">Repair</option>
+                                <option value="service">Maintenance Service</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" id="serviceDescription" class="form-control"
+                                   placeholder="e.g., Screen replacement, Software update" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Customer Name</label>
+                                <input type="text" id="serviceCustomerName" class="form-control" placeholder="Customer name">
+                            </div>
+                            <div class="form-group">
+                                <label>Customer Phone</label>
+                                <input type="tel" id="serviceCustomerPhone" class="form-control" placeholder="+254 712 345 678">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Amount (KSH)</label>
+                                <input type="number" id="serviceAmount" class="form-control"
+                                       placeholder="0.00" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Payment Method</label>
+                                <select id="servicePayment" class="form-control" required>
+                                    <option value="cash">💵 Cash</option>
+                                    <option value="mpesa">📱 M-Pesa</option>
+                                    <option value="card">💳 Card</option>
+                                    <option value="bank_transfer">🏦 Bank Transfer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Product Category</label>
+                            <input type="text" id="serviceProductCategory" class="form-control"
+                                   placeholder="e.g., Electronics, Hardware">
+                        </div>
+                        <div class="form-group">
+                            <label>📅 Date</label>
+                            <input type="datetime-local" id="serviceDate" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Notes</label>
+                            <textarea id="serviceNotes" class="form-control" rows="3"
+                                      placeholder="Additional details about the service..."></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="closeAddRepairsServicesModal()">✖ Cancel</button>
+                            <button type="submit" class="btn btn-primary">💾 Save Service</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Category</label>
-                    <select id="revenueCategory" class="form-control" required>
-                        <option value="sales">Product Sales</option>
-                        <option value="service">Services</option>
-                        <option value="repair">Repairs</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>📅 Date</label>
-                    <input type="datetime-local" id="revenueDate" class="form-control" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Customer Name (Optional)</label>
-                <input type="text" id="revenueCustomer" class="form-control" 
-                       placeholder="Walk-in Customer">
-            </div>
-
-            <div class="form-group">
-                <label>Notes</label>
-                <textarea id="revenueNotes" class="form-control" rows="2" 
-                          placeholder="Additional details..."></textarea>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeAddRevenueModal()">
-                     Cancel
-                </button>
-                <button type="submit" class="btn btn-primary">
-                    💾 Save Revenue
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Revenue Details Modal -->
-<div id="revenueDetailsModal" class="modal">
-    <div class="modal-content" style="max-width: 600px;">
-        <div class="modal-header">
-            <h2>📄 Revenue Details</h2>
-            <span class="close" onclick="closeRevenueDetailsModal()">✖</span>
-        </div>
-        <div id="revenueDetailsContent"></div>
-    </div>
-</div>
-
-<!-- Repairs & Services Section -->
-<div id="repairs-services" class="content-section">
-    <div class="section-header">
-        <div class="header-title">
-            <h1>Repairs & Services Revenue</h1>
-            <p class="text-muted">Repairs and service revenue</p>
-        </div>
-        <button class="btn btn-primary" onclick="showAddRepairsServicesModal()">
-            <i class="fas fa-plus"></i> Add Service
-        </button>
-    </div>
-
-    <!-- Repairs & Services Statistics Cards -->
-    <div class="stats-grid">
-        <div class="stat-card today-revenue">
-            <div class="stat-details">
-                <span class="stat-label">Today</span>
-                <span class="stat-value" id="todayServicesRevenue">KSH 0</span>
-                <span class="stat-period" id="todayServicesCount">0 services</span>
-            </div>
-        </div>
-
-        <div class="stat-card week-revenue">
-            <div class="stat-details">
-                <span class="stat-label">This Week</span>
-                <span class="stat-value" id="weekServicesRevenue">KSH 0</span>
-                <span class="stat-period" id="weekServicesCount">0 services</span>
-            </div>
-        </div>
-
-        <div class="stat-card month-revenue">
-            <div class="stat-details">
-                <span class="stat-label">This Month</span>
-                <span class="stat-value" id="monthServicesRevenue">KSH 0</span>
-                <span class="stat-period" id="monthServicesCount">0 services</span>
-            </div>
-        </div>
-
-        <div class="stat-card total-revenue">
-            <div class="stat-details">
-                <span class="stat-label">Total Services Revenue</span>
-                <span class="stat-value" id="totalServicesRevenue">KSH 0</span>
-                <span class="stat-period">All time</span>
-            </div>
-        </div>
-    </div>
-<!-- Service Type Breakdown -->
-<div class="service-breakdown">
-    <h3 class="breakdown-title">Breakdown</h3>
-    <div class="service-cards">
-
-        <div class="service-card repairs">
-            <div class="service-icon-wrapper">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                </svg>
-            </div>
-            <div class="service-details">
-                <span class="service-label">Repairs</span>
-                <span class="service-amount" id="repairsAmount">KSH 0</span>
-                <span class="service-count" id="repairsCount">0 items</span>
-            </div>
-        </div>
-
-        <div class="service-card services">
-            <div class="service-icon-wrapper">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
-                </svg>
-            </div>
-            <div class="service-details">
-                <span class="service-label">Services</span>
-                <span class="service-amount" id="maintenanceAmount">KSH 0</span>
-                <span class="service-count" id="maintenanceCount">0 items</span>
-            </div>
-        </div>
-
-    </div>
-</div>
-    <!-- Repairs & Services List -->
-    <div class="services-list" style="background: white; padding: 20px; border-radius: 8px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <h3 style="margin: 0;">Recent Services</h3>
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <label for="servicesMonthFilter" style="margin: 0; font-weight: 500;">Filter by Month:</label>
-                <select id="servicesMonthFilter" class="form-control" style="width: 200px; padding: 8px;">
-                    <option value="">All Months</option>
-                </select>
-            </div>
-        </div>
-        <div id="servicesTableContainer">
-            <table class="table">
-                <thead>
-                    <tr>
-                       
-                        <th>Service Type</th>
-                        <th>Customer</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Payment Method</th>
-                        <th>Status</th>
-                         <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody id="servicesTableBody">
-                    <tr>
-                        <td colspan="7" style="text-align: center; padding: 20px;">No services recorded yet</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-  
-<div class="pagination-section" style="margin-top:12px;">
-    <button class="btn-pagination" onclick="prevServicesPage()" id="prevServicesBtn" disabled>
-        ← Previous
-    </button>
-    <span id="servicesPageInfo">Page 1 of 1</span>
-    <button class="btn-pagination" onclick="nextServicesPage()" id="nextServicesBtn" disabled>
-        Next →
-    </button>
-</div>
-</div>
-
-<!-- Add Repairs & Services Modal -->
-<div id="addRepairsServicesModal" class="modal">
-    <div class="modal-content" style="max-width: 600px;">
-        <div class="modal-header">
-            <h2> Add Repairs & Services</h2>
-            <span class="close" onclick="closeAddRepairsServicesModal()">✖</span>
-        </div>
-
-        <form id="addRepairsServicesForm">
-            <div class="form-group">
-                <label>Service Type</label>
-                <select id="serviceType" class="form-control" required>
-                    <option value="">Select Service Type</option>
-                    <option value="repair"> Repair</option>
-                    <option value="service"> Maintenance Service</option>
-                    <!-- <option value="consultation">📋 Consultation</option>
-                    <option value="installation">📦 Installation</option>
-                    <option value="warranty">🛡️ Warranty Service</option> -->
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Description</label>
-                <input type="text" id="serviceDescription" class="form-control" 
-                       placeholder="e.g., Screen replacement, Software update" required>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Customer Name</label>
-                    <input type="text" id="serviceCustomerName" class="form-control" 
-                           placeholder="Customer name" >
-                </div>
-
-                <div class="form-group">
-                    <label>Customer Phone</label>
-                    <input type="tel" id="serviceCustomerPhone" class="form-control" 
-                           placeholder="+254 712 345 678">
-                </div>
-            </div>
-
-            <!-- <div class="form-group">
-                <label>Customer Email (Optional)</label>
-                <input type="email" id="serviceCustomerEmail" class="form-control" 
-                       placeholder="customer@example.com">
-            </div> -->
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Amount (KSH)</label>
-                    <input type="number" id="serviceAmount" class="form-control" 
-                           placeholder="0.00" min="0" step="0.01" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Payment Method</label>
-                    <select id="servicePayment" class="form-control" required>
-                        <option value="cash">💵 Cash</option>
-                        <option value="mpesa">📱 M-Pesa</option>
-                        <option value="card">💳 Card</option>
-                        <option value="bank_transfer">🏦 Bank Transfer</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Product Category</label>
-                    <input type="text" id="serviceProductCategory" class="form-control" 
-                           placeholder="e.g., Electronics, Hardware">
-                </div>
-
-                <!-- <div class="form-group">
-                    <label>Technician Name</label>
-                    <input type="text" id="serviceTechnicianName" class="form-control" 
-                           placeholder="">
-                </div> -->
-            </div>
-
-            <div class="form-group">
-                <label>📅 Date</label>
-                <input type="datetime-local" id="serviceDate" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-                <label>Notes</label>
-                <textarea id="serviceNotes" class="form-control" rows="3" 
-                          placeholder="Additional details about the service..."></textarea>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeAddRepairsServicesModal()">
-                    ✖ Cancel
-                </button>
-                <button type="submit" class="btn btn-primary">
-                    💾 Save Service
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
-            <!-- Expenses Management Section -->
-            
+            <!-- ══════════════════════════════════════════════
+                 EXPENSES SECTION
+            ══════════════════════════════════════════════ -->
             <div id="expenses" class="content-section">
                 <div class="section-header">
                     <div class="header-title">
-                        <h1> Expenses Management</h1>
+                        <h1>Expenses Management</h1>
                         <p class="text-muted">Manage your business expenses</p>
                     </div>
-                    <button class="btn btn-primary " onclick="showExpenseModal()">
-                    Add Expense
-                    </button>
+                    <button class="btn btn-primary" onclick="showExpenseModal()">Add Expense</button>
                 </div>
-            
-                <!-- Expense Statistics Cards -->
+
+                <!-- Expense stat cards -->
                 <div class="stats-grid">
-               
-            
-                    <div class="stat-card today-card">
-                        <div class="stat-icon">📅</div>
-                        <div class="stat-details">
-                            <span class="stat-label">Today</span>
-                            <span class="stat-value" id="todayExpenses">0</span>
-                            <span class="stat-period" id="todayCount">0 expenses</span>
-                        </div>
-                    </div>
-            
-                    <div class="stat-card week-card">
-                        <div class="stat-icon">📆</div>
-                        <div class="stat-details">
-                            <span class="stat-label">This Week</span>
-                            <span class="stat-value" id="weekExpenses">0</span>
-                            <span class="stat-period" id="weekCount">0 expenses</span>
-                        </div>
-                    </div>
-            
-                    <div class="stat-card month-card">
-                        <!-- <div class="stat-icon">📊</div> -->
-                        <div class="stat-details">
-                            <span class="stat-label">This Month</span>
-                            <span class="stat-value" id="monthExpenses">0</span>
-                            <span class="stat-period" id="monthCount">0 expenses</span>
-                        </div>
+                    <div class="sp-stat-card sp-stat-red">
+                        <div class="sp-stat-label">Today</div>
+                        <div class="sp-stat-value" id="todayExpenses">0</div>
+                        <div class="sp-stat-sub" id="todayCount">0 expenses</div>
                     </div>
 
-                         <div class="stat-card total-card">
-                        <!-- <div class="stat-icon">💰</div> -->
-                        <div class="stat-details">
-                            <span class="stat-label">Total Expenses</span>
-                            <span class="stat-value" id="totalExpenses">0</span>
-                            <span class="stat-period" id="totalPeriod">All time</span>
-                        </div>
+                    <div class="sp-stat-card sp-stat-blue">
+                        <div class="sp-stat-label">This Week</div>
+                        <div class="sp-stat-value" id="weekExpenses">0</div>
+                        <div class="sp-stat-sub" id="weekCount">0 expenses</div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-purple">
+                        <div class="sp-stat-label">This Month</div>
+                        <div class="sp-stat-value" id="monthExpenses">0</div>
+                        <div class="sp-stat-sub" id="monthCount">0 expenses</div>
+                    </div>
+
+                    <div class="sp-stat-card sp-stat-orange">
+                        <div class="sp-stat-label">Total Expenses</div>
+                        <div class="sp-stat-value" id="totalExpenses">0</div>
+                        <div class="sp-stat-sub" id="totalPeriod">All time</div>
                     </div>
                 </div>
-            
+
                 <!-- Summary Cards -->
                 <div class="summary-cards">
                     <div class="summary-card">
@@ -832,23 +716,20 @@
                         <div class="summary-value" id="topPayment">-</div>
                     </div>
                 </div>
-            
+
                 <!-- Category Breakdown -->
                 <div class="category-breakdown">
-                    <h3> Category Breakdown</h3>
+                    <h3>Category Breakdown</h3>
                     <div class="category-list" id="categoryList"></div>
                 </div>
-            
+
                 <!-- Filters and Search -->
                 <div class="filters-section">
                     <div class="search-box">
-                        <input type="text"
-                               id="expenseSearch"
-                               class="form-control"
+                        <input type="text" id="expenseSearch" class="form-control"
                                placeholder="🔍 Search by description or category..."
                                onkeyup="debounceLoadExpenses()" />
                     </div>
-            
                     <div class="filter-group">
                         <select id="expenseFilter" class="form-control" onchange="loadExpenses()">
                             <option value="day">Today</option>
@@ -856,33 +737,25 @@
                             <option value="month">This Month</option>
                             <option value="all" selected>All Time</option>
                         </select>
-            
                         <select id="categoryFilter" class="form-control" onchange="loadExpenses()">
                             <option value="">All Categories</option>
-                            <option value="rent"> Rent</option>
-                            <!-- <option value="stock">Stock</option> -->
-                            <option value="transport"> Transport</option>
+                            <option value="rent">Rent</option>
+                            <option value="transport">Transport</option>
                             <option value="utilities">Utilities</option>
-                            <!-- <option value="salary">Salary</option> -->
                             <option value="other">Other</option>
                         </select>
-            
                         <select id="paymentFilter" class="form-control" onchange="loadExpenses()">
                             <option value="">All Payments</option>
-                            <option value="cash"> Cash</option>
-                            <option value="mpesa"> M-Pesa</option>
-                            <option value="bank"> Bank</option>
+                            <option value="cash">Cash</option>
+                            <option value="mpesa">M-Pesa</option>
+                            <option value="bank">Bank</option>
                         </select>
-            
                         <input type="date" id="dateFrom" class="form-control" onchange="loadExpenses()" placeholder="From">
                         <input type="date" id="dateTo" class="form-control" onchange="loadExpenses()" placeholder="To">
-            
-                        <button class="btn btn-secondary" onclick="resetFilters()">
-                             Reset
-                        </button>
+                        <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
                     </div>
                 </div>
-            
+
                 <!-- Quick Stats Row -->
                 <div class="quick-stats">
                     <div class="quick-stat-item">
@@ -896,23 +769,19 @@
                     <div class="quick-stat-item">
                         <span class="stat-name">M-Pesa Expenses:</span>
                         <span class="stat-number" id="mpesaTotal">0</span>
-                    </div>                   
-                     <div class="quick-stat-item">
+                    </div>
+                    <div class="quick-stat-item">
                         <span class="stat-name">Bank Expenses:</span>
                         <span class="stat-number" id="bankTotal">0</span>
                     </div>
                 </div>
-            
+
                 <!-- Export Options -->
                 <div class="export-section">
-                    <button class="btn btn-success" onclick="exportToCSV()">
-                        📥 Export to CSV
-                    </button>
-                    <button class="btn btn-info" onclick="printReport()">
-                        🖨️ Print Report
-                    </button>
+                    <button class="btn btn-success" onclick="exportToCSV()">📥 Export to CSV</button>
+                    <button class="btn btn-info" onclick="printReport()">🖨️ Print Report</button>
                 </div>
-            
+
                 <!-- Expenses Table -->
                 <div class="table-container">
                     <table class="table">
@@ -928,58 +797,46 @@
                         </thead>
                         <tbody id="expensesList"></tbody>
                     </table>
-                    <div id="noDataMessage" class="no-data" style="display: none;">
-                        No expenses found
-                    </div>
+                    <div id="noDataMessage" class="no-data" style="display: none;">No expenses found</div>
                 </div>
-            
+
                 <!-- Pagination -->
                 <div class="pagination-section">
-                    <button class="btn-pagination" onclick="prevPage()" id="prevBtn" disabled>
-                        ← Previous
-                    </button>
+                    <button class="btn-pagination" onclick="prevPage()" id="prevBtn" disabled>← Previous</button>
                     <span id="pageInfo">Page 1 of 1</span>
-                    <button class="btn-pagination" onclick="nextPage()" id="nextBtn" disabled>
-                        Next →
-                    </button>
+                    <button class="btn-pagination" onclick="nextPage()" id="nextBtn" disabled>Next →</button>
                 </div>
             </div>
-            
+
             <!-- Add Expense Modal -->
             <div id="expenseModal" class="modal">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2
-                            style="color: white; background-color: var(--primary); padding: 10px; border: none; border-radius: 6px;">
-                            Add New Expense</h2>
+                        <h2 style="color: white; background-color: var(--primary); padding: 10px; border: none; border-radius: 6px;">Add New Expense</h2>
                         <span class="close" onclick="closeExpenseModal()">✖</span>
                     </div>
-            
                     <form id="expenseForm">
                         <div class="form-group">
-                            <label> Description</label>
-                            <input type="text" id="expenseDescription" class="form-control" placeholder="e.g., Office rent, Stock purchase..." required>
+                            <label>Description</label>
+                            <input type="text" id="expenseDescription" class="form-control"
+                                   placeholder="e.g., Office rent, Stock purchase..." required>
                         </div>
-            
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Category</label>
                                 <select id="expenseCategory" class="form-control" required>
                                     <option value="rent">Rent</option>
-                                    <!-- <option value="stock">Stock Purchase</option> -->
                                     <option value="transport">Transport</option>
                                     <option value="utilities">Utilities</option>
-                                    <!-- <option value="salary">Salary</option> -->
                                     <option value="other">Other</option>
                                 </select>
                             </div>
-            
                             <div class="form-group">
                                 <label>Amount (KSH)</label>
-                                <input type="number" id="expenseAmount" class="form-control" placeholder="0.00" min="0" step="0.01" required>
+                                <input type="number" id="expenseAmount" class="form-control"
+                                       placeholder="0.00" min="0" step="0.01" required>
                             </div>
                         </div>
-            
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Payment Method</label>
@@ -989,30 +846,24 @@
                                     <option value="bank">Bank</option>
                                 </select>
                             </div>
-            
                             <div class="form-group">
                                 <label>📅 Date</label>
                                 <input type="datetime-local" id="expenseDate" class="form-control" required>
                             </div>
                         </div>
-            
                         <div class="form-group">
                             <label>Notes (Optional)</label>
-                            <textarea id="expenseNotes" class="form-control" rows="2" placeholder="Add any additional notes..."></textarea>
+                            <textarea id="expenseNotes" class="form-control" rows="2"
+                                      placeholder="Add any additional notes..."></textarea>
                         </div>
-            
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" onclick="closeExpenseModal()">
-                                ✖ Cancel
-                            </button>
-                            <button type="submit" class="btn btn-primary">
-                                💾 Save Expense
-                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="closeExpenseModal()">✖ Cancel</button>
+                            <button type="submit" class="btn btn-primary">💾 Save Expense</button>
                         </div>
                     </form>
                 </div>
             </div>
-            
+
             <!-- Edit Expense Modal -->
             <div id="editExpenseModal" class="modal">
                 <div class="modal-content">
@@ -1031,10 +882,8 @@
                                 <label>Category</label>
                                 <select id="editExpenseCategory" class="form-control" required>
                                     <option value="rent">Rent</option>
-                                    <!-- <option value="stock">Stock</option> -->
                                     <option value="transport">Transport</option>
                                     <option value="utilities">Utilities</option>
-                                    <!-- <option value="salary">Salary</option> -->
                                     <option value="other">Other</option>
                                 </select>
                             </div>
@@ -1051,10 +900,10 @@
                                 <option value="bank">Bank</option>
                             </select>
                         </div>
-                         <div class="form-group">
-                                <label>📅 Date</label>
-                                <input type="datetime-local" id="editExpenseDate" class="form-control" required>
-                            </div>
+                        <div class="form-group">
+                            <label>📅 Date</label>
+                            <input type="datetime-local" id="editExpenseDate" class="form-control" required>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" onclick="closeEditModal()">✖ Cancel</button>
                             <button type="submit" class="btn btn-primary">Update</button>
@@ -1062,7 +911,7 @@
                     </form>
                 </div>
             </div>
-            
+
             <!-- Delete Confirmation Modal -->
             <div id="deleteModal" class="modal">
                 <div class="modal-content" style="max-width: 400px;">
@@ -1078,15 +927,18 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Toast Notification -->
             <div id="toast" class="toast-notification"></div>
 
-            <!-- Products Section -->
+            <!-- ══════════════════════════════════════════════
+                 PRODUCTS SECTION
+            ══════════════════════════════════════════════ -->
             <div id="products" class="content-section">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <h1>Product Management</h1>
-                    <input type="text" id="search-bar" placeholder="Search products..." onkeyup="searchProducts(this.value)" class="form-control" style="width: 300px;" />
+                    <input type="text" id="search-bar" placeholder="Search products..."
+                           onkeyup="searchProducts(this.value)" class="form-control" style="width: 300px;" />
                     <button class="btn btn-primary" onclick="showAddProductModal()">Add Product</button>
                 </div>
                 <div id="productsTable">
@@ -1102,17 +954,19 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="productsList">
-                            <!-- Products will be loaded here -->
-                        </tbody>
+                        <tbody id="productsList"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Users Management Section -->
+            <!-- ══════════════════════════════════════════════
+                 USERS SECTION
+            ══════════════════════════════════════════════ -->
             <div id="users" class="content-section">
                 <h1>User Management</h1>
-                <input type="text" id="search-bar" placeholder="Search Users..." onkeyup="searchUsers(this.value)" autocomplete="off" class="form-control" style="width: 300px; margin-bottom: 20px;" />
+                <input type="text" id="search-bar" placeholder="Search Users..."
+                       onkeyup="searchUsers(this.value)" autocomplete="off"
+                       class="form-control" style="width: 300px; margin-bottom: 20px;" />
                 <div id="usersTable">
                     <table class="table">
                         <thead>
@@ -1124,17 +978,19 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="usersList">
-                            <!-- Users will be loaded here -->
-                        </tbody>
+                        <tbody id="usersList"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Orders Section -->
+            <!-- ══════════════════════════════════════════════
+                 ORDERS SECTION
+            ══════════════════════════════════════════════ -->
             <div id="orders" class="content-section">
                 <h1>Order Management</h1>
-                <input type="text" id="search-bar" placeholder="Enter Order number or Client Name" onkeyup="searchOrders(this.value)" class="form-control" style="width: 300px; margin-bottom: 20px;" />
+                <input type="text" id="search-bar" placeholder="Enter Order number or Client Name"
+                       onkeyup="searchOrders(this.value)" class="form-control"
+                       style="width: 300px; margin-bottom: 20px;" />
                 <div id="ordersTable">
                     <table class="table">
                         <thead>
@@ -1147,14 +1003,14 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="ordersList">
-                            <!-- Orders will be loaded here -->
-                        </tbody>
+                        <tbody id="ordersList"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Admins Section -->
+            <!-- ══════════════════════════════════════════════
+                 ADMINS SECTION
+            ══════════════════════════════════════════════ -->
             <div id="admins" class="content-section">
                 <h1>Admin Management</h1>
                 <div id="adminsTable">
@@ -1168,9 +1024,7 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="adminsList">
-                            <!-- Admins will be loaded here -->
-                        </tbody>
+                        <tbody id="adminsList"></tbody>
                     </table>
                 </div>
             </div>
@@ -1194,8 +1048,9 @@
                     <button type="submit" class="btn btn-primary">Create Admin</button>
                 </form>
             </div>
-        </div>
-    </div>
+
+        </div><!-- /main-content -->
+    </div><!-- /dashboard-container -->
 
     <!-- Add Product Modal -->
     <div id="productModal" class="modal">
@@ -1204,13 +1059,13 @@
             <form id="productForm" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="productName">Name</label>
-                    <input type="text" id="productName" class="form-control" required>
+                    <input type="text" id="productName" class="form-control" >
                 </div>
                 <div class="form-group">
                     <label for="productDescription">Description</label>
                     <textarea id="productDescription" class="form-control" rows="3"></textarea>
                 </div>
-                    <div class="form-group">
+                <div class="form-group">
                     <label for="productCost">Cost (KSH)</label>
                     <input type="number" id="productCost" class="form-control" step="0.01" required>
                 </div>
@@ -1231,17 +1086,18 @@
                     <label for="productCategory">Category</label>
                     <select id="productCategory" name="productCategory" class="form-control" required>
                         <option value="">Select a category</option>
-                        <option value="screens">screens</option>
+                        <option value="screens">Screens</option>
                         <option value="phones accessories">Phone Accessories</option>
                         <option value="phones">Phones</option>
                         <option value="batteries">Batteries</option>
-                        <option value="computer">Computer & Network</option>
+                        <option value="computer">Computer &amp; Network</option>
                         <option value="electricals">Electricals</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="productImage">Product Image</label>
-                    <input type="file" id="productImage" class="form-control" accept="image/*">
+                    <!-- <input type="file" id="productImage" class="form-control" accept="image/*" required> -->
+                    <input type="file" id="productImage" name="images"class="form-control" accept="image/*" required>
                 </div>
                 <div style="display: flex; gap: 10px; margin-top: 20px;">
                     <button type="submit" class="btn btn-primary">Save Product</button>
@@ -1251,21 +1107,13 @@
         </div>
     </div>
 
-      <!-- <script src="./frontend/public/assets/js/admin-dashboard.js" defer></script> -->
-      
-      <!-- <script src="./frontend/public/assets/js/expenses.js" defer></script> -->
-
-        <script src="/assets/js/admin-dashboard.js" defer></script>
-      
-      <script src="/assets/js/expenses.js" defer></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js" defer></script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-  
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
-   
+    <script src="/assets/js/admin-dashboard.js" defer></script>
+    <script src="/assets/js/purchase.js"></script>
+    <script src="/assets/js/expenses.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 </body>
 </html>

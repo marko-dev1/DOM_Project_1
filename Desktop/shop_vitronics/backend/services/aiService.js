@@ -1,0 +1,1 @@
+const { GENERATE_PROMPT, EDIT_PROMPT, COMPATIBILITY_PROMPT } = require('../config/aiPrompts');

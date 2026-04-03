@@ -1,3 +1,36 @@
+// ==================== CALENDAR HELPER FUNCTIONS ====================
+
+function getCalendarMonthStart() {
+    const now = new Date();
+    const d = new Date(now.getFullYear(), now.getMonth(), 1);
+    d.setHours(0, 0, 0, 0);
+    return d;
+}
+
+function getCalendarWeekStart() {
+    const now = new Date();
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+    monthStart.setHours(0, 0, 0, 0);
+
+    const day = now.getDay(); // 0=Sun
+    const diff = now.getDate() - day + (day === 0 ? -6 : 1); // Monday
+    const d = new Date(now.getFullYear(), now.getMonth(), diff);
+    d.setHours(0, 0, 0, 0);
+
+    // If week start falls in previous month, use month start instead
+    if (d < monthStart) {
+        return monthStart;
+    }
+
+    return d;
+}
+
+function getCalendarTodayStart() {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+}
+
 // Global variables
 let currentPage = 1;
 const itemsPerPage = 10;
@@ -296,14 +329,10 @@ function updateAllStats(expenses) {
         all: expenses.length
     };
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const weekAgo = new Date(today);
-    weekAgo.setDate(weekAgo.getDate() - 7);
-
-    const monthAgo = new Date(today);
-    monthAgo.setMonth(monthAgo.getMonth() - 1);
+    // Use calendar-based periods
+    const todayStart = getCalendarTodayStart();
+    const weekStart = getCalendarWeekStart();
+    const monthStart = getCalendarMonthStart();
 
     // Category tracking
     const categoryTotals = {};
@@ -328,16 +357,17 @@ function updateAllStats(expenses) {
         totals.all += amount;
 
         const expDate = new Date(exp.expense_date || exp.created_at);
+        expDate.setHours(0, 0, 0, 0); // Normalize to start of day
         
-        if (expDate >= today) {
+        if (expDate >= todayStart) {
             totals.day += amount;
             counts.day++;
         }
-        if (expDate >= weekAgo) {
+        if (expDate >= weekStart) {
             totals.week += amount;
             counts.week++;
         }
-        if (expDate >= monthAgo) {
+        if (expDate >= monthStart) {
             totals.month += amount;
             counts.month++;
         }

@@ -3,14 +3,23 @@ const db = require('../config/database');
 
 exports.getRevenueSummary = async (req, res) => {
     try {
-        const today = new Date();
+        // Use UTC dates to ensure consistency between local and live server
+        const now = new Date();
+        const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
         const todayStr = today.toISOString().split('T')[0];
 
-        const weekStart = new Date(today);
-        weekStart.setDate(today.getDate() - today.getDay());
+        const weekStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - (now.getUTCDay() || 7) + 1)); // Monday start
+        
+        // If week start falls in previous month, use month start instead
+        // This ensures weekly data resets when new month begins mid-week
+        const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
+        if (weekStart < monthStart) {
+            weekStart.setTime(monthStart.getTime());
+        }
+        
         const weekStartStr = weekStart.toISOString().split('T')[0];
 
-        const monthStartStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-01`;
+        const monthStartStr = monthStart.toISOString().split('T')[0];
         const allTimeStart = '2000-01-01';
 
         // Get sales statistics
@@ -79,7 +88,7 @@ exports.getRevenueSummary = async (req, res) => {
 
         // Calculate product-level profit using sale_items and product cost
         const profitQuery = `
-            SELECT COALESCE(SUM((si.unit_price - COALESCE(p.cost,0)) * si.quantity), 0) as profit
+            SELECT COALESCE(SUM((si.unit_price - COALESCE(p.price,0)) * si.quantity), 0) as profit
             FROM sale_items si
             JOIN sales s ON si.sale_id = s.id
             LEFT JOIN products p ON si.product_id = p.id
@@ -138,8 +147,9 @@ exports.getRevenueTrend = async (req, res) => {
 
         if (groupBy === 'month') {
             const months = Math.max(1, parseInt(req.query.months, 10) || 6);
-            const endDate = new Date();
-            const startDate = new Date(endDate.getFullYear(), endDate.getMonth() - (months - 1), 1);
+            const now = new Date();
+            const endDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+            const startDate = new Date(Date.UTC(endDate.getUTCFullYear(), endDate.getUTCMonth() - (months - 1), 1));
             const startStr = startDate.toISOString().split('T')[0];
             const endStr = endDate.toISOString().split('T')[0];
 
@@ -604,14 +614,24 @@ exports.getRepairsServices = async (req, res) => {
 // Get repairs and services summary
 exports.getRepairsServicesSummary = async (req, res) => {
     try {
-        const today = new Date();
+        // Use UTC dates to ensure consistency between local and live server
+        const now = new Date();
+        const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
         const todayStr = today.toISOString().split('T')[0];
 
-        const weekStart = new Date(today);
-        weekStart.setDate(today.getDate() - today.getDay());
+        // Calendar week start (Monday, UTC)
+        const weekStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - (now.getUTCDay() || 7) + 1)); // Monday start
+        
+        // If week start falls in previous month, use month start instead
+        // This ensures weekly data resets when new month begins mid-week
+        const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
+        if (weekStart < monthStart) {
+            weekStart.setTime(monthStart.getTime());
+        }
+        
         const weekStartStr = weekStart.toISOString().split('T')[0];
 
-        const monthStartStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-01`;
+        const monthStartStr = monthStart.toISOString().split('T')[0];
         const allTimeStart = '2000-01-01';
 
         // Query for summary

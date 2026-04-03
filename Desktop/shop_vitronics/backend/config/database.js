@@ -44,6 +44,8 @@ const createTables = async () => {
     let connection;
     try {
         connection = await pool.getConnection();
+
+        
         // Users table
         await connection.execute(`
             CREATE TABLE IF NOT EXISTS users (
@@ -257,6 +259,36 @@ const createTables = async () => {
                 INDEX idx_payment_method (payment_method)
             )
         `);
+// Stock purchases table
+        await connection.execute(`
+    CREATE TABLE IF NOT EXISTS stock_purchases (
+        id              INT AUTO_INCREMENT PRIMARY KEY,
+        product_id      INT            NOT NULL,
+        product_name    VARCHAR(255)   NOT NULL,
+        category        VARCHAR(100)   DEFAULT '',
+        supplier_name   VARCHAR(255)   DEFAULT '',
+        supplier_phone  VARCHAR(50)    DEFAULT '',
+        quantity        INT            NOT NULL DEFAULT 0,
+        unit_cost       DECIMAL(12,2)  NOT NULL DEFAULT 0.00,
+        total_cost      DECIMAL(12,2)  NOT NULL DEFAULT 0.00,
+        payment_method  VARCHAR(50)    DEFAULT 'Cash',
+        status          ENUM('received','pending','returned') DEFAULT 'received',
+        notes           TEXT,
+        purchase_date   DATETIME       DEFAULT CURRENT_TIMESTAMP,
+        created_by      INT            DEFAULT NULL,
+        created_at      TIMESTAMP      DEFAULT CURRENT_TIMESTAMP,
+        updated_at      TIMESTAMP      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ 
+        INDEX idx_product_id    (product_id),
+        INDEX idx_status        (status),
+        INDEX idx_purchase_date (purchase_date),
+        INDEX idx_supplier      (supplier_name),
+        INDEX idx_created_at    (created_at),
+ 
+        FOREIGN KEY (product_id)  REFERENCES products(id)  ON DELETE CASCADE,
+        FOREIGN KEY (created_by)  REFERENCES users(id)     ON DELETE SET NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+`);
 
         // Repairs and services revenue table
         await connection.execute(`

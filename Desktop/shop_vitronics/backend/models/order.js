@@ -10,7 +10,7 @@ const Order = {
       o.status, 
       o.shipping_address,
       o.payment_method, 
-      o.customer_Name AS customer_name,
+     
       o.customer_phone,
       o.created_at, 
       u.username, 

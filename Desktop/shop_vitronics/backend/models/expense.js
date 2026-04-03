@@ -42,20 +42,36 @@ exports.deleteExpense = async (id) => {
 };
 
 exports.getExpenseStats = async () => {
+    // Use UTC dates to match revenue controller calculations
+    const now = new Date();
+    const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+    const todayStr = today.toISOString().split('T')[0];
+
+    const weekStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - now.getUTCDay()));
+    const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
+    
+    // If week start falls in previous month, use month start instead
+    if (weekStart < monthStart) {
+        weekStart.setTime(monthStart.getTime());
+    }
+    
+    const weekStartStr = weekStart.toISOString().split('T')[0];
+    const monthStartStr = monthStart.toISOString().split('T')[0];
+
     const query = `
         SELECT 
             COALESCE(SUM(CASE 
-                WHEN DATE(created_at) = CURDATE() THEN amount ELSE 0 
+                WHEN DATE(created_at) = ? THEN amount ELSE 0 
             END), 0) as today,
             COALESCE(SUM(CASE 
-                WHEN YEARWEEK(created_at, 1) = YEARWEEK(CURDATE(), 1) THEN amount ELSE 0 
+                WHEN DATE(created_at) BETWEEN ? AND ? THEN amount ELSE 0 
             END), 0) as weekly,
             COALESCE(SUM(CASE 
-                WHEN MONTH(created_at) = MONTH(CURDATE()) AND YEAR(created_at) = YEAR(CURDATE()) THEN amount ELSE 0 
+                WHEN DATE(created_at) BETWEEN ? AND ? THEN amount ELSE 0 
             END), 0) as monthly,
             COALESCE(SUM(amount), 0) as allTime
         FROM expenses
     `;
-    const [rows] = await db.pool.execute(query);
+    const [rows] = await db.pool.execute(query, [todayStr, weekStartStr, todayStr, monthStartStr, todayStr]);
     return rows[0] || { today: 0, weekly: 0, monthly: 0, allTime: 0 };
 };
